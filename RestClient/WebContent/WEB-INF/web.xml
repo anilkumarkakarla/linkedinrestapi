@@ -12,8 +12,16 @@
 		<servlet-name>clientServlet</servlet-name>
 		<url-pattern>/client</url-pattern>
 	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>linkedInResponse</servlet-name>
+        <url-pattern>/callback</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>linkedInResponse</servlet-name>
+        <servlet-class>LinkedInResponse</servlet-class>
+    </servlet>
 
-	<welcome-file-list>
-		<welcome-file>client.jsp</welcome-file>
+    <welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>
