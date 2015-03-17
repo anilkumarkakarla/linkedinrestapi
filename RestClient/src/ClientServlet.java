@@ -22,7 +22,7 @@ public class ClientServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Inside goGet method");
+        System.out.println("Inside doGet method");
         LinkedInOAuthService oauthService = LinkedInOAuthServiceFactory.getInstance().createLinkedInOAuthService("77ywtoz3eay8jk", "qvP3Jh0mHBkUs80i");
         System.out.println("oauthService String::" + oauthService.toString());
         System.out.println("oauthService::" + oauthService.getOAuthRequestToken());
