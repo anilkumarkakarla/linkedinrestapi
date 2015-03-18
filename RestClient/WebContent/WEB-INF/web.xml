@@ -28,7 +28,7 @@
     
     <servlet-mapping>
 		<servlet-name>companyServlet</servlet-name>
-		<url-pattern>/client1</url-pattern>
+		<url-pattern>/client</url-pattern>
 	</servlet-mapping>
     
     

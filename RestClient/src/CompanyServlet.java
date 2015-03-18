@@ -39,9 +39,12 @@ public class CompanyServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		getCompanyById(request,response);
-		getCompanyByUniversalName(request,response);
-		getCompanyByEmailDomain(request,response);
+		//getCompanyById(request,response);
+		//getCompanyByUniversalName(request,response);
+		//getCompanyByEmailDomain(request,response);
+		//getCompanyByIdAndUniversalName(request,response);
+		//searchCompanies(request,response);
+		getFollweCompanies(request,response);
 		
 	}
 	
@@ -55,13 +58,11 @@ public class CompanyServlet extends HttpServlet {
 		
 		
 		WebResource webResource = client.resource("https://api.linkedin.com/v1/companies/id=1009?format=json&oauth2_access_token=" + auth);
-		//WebResource webResource = client.resource(url+"="+ auth);
 		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + resp);
 		if (resp.getStatus() == 200) {
 			String output = resp.getEntity(String.class);
 			System.out.println("inside if" + output);
-			//JsonGenerator out = resp.getEntity(JsonGenerator.class);
 			try{
 				System.out.println("Inside try::");
 				personInfo = new ObjectMapper().readValue(output, Person.class);
@@ -85,13 +86,11 @@ public class CompanyServlet extends HttpServlet {
 		Client client = Client.create();
 		String auth = request.getParameter("auth");
 		WebResource webResource = client.resource("https://api.linkedin.com/v1/companies/universal-name=linkedin?format=json&oauth2_access_token=" + auth);
-		//WebResource webResource = client.resource(url+"="+ auth);
 		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + resp);
 		if (resp.getStatus() == 200) {
 			String output = resp.getEntity(String.class);
 			System.out.println("inside if" + output);
-			//JsonGenerator out = resp.getEntity(JsonGenerator.class);
 			try{
 				System.out.println("Inside try::");
 				personInfo = new ObjectMapper().readValue(output, Person.class);
@@ -146,18 +145,25 @@ public class CompanyServlet extends HttpServlet {
 	public void getCompanyByIdAndUniversalName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		System.out.println("getCompanyByIdAndUniversalName::");
-		Person personInfo = new Person();
 		Client client = Client.create();
 		String auth = request.getParameter("auth");
 		WebResource webResource = client.resource("https://api.linkedin.com/v1/companies::(162479,universal-name=linkedin)?format=json&oauth2_access_token=" + auth);
 		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + resp);
-		Map<String, Object> map = new HashMap<String, Object>();
-		ObjectMapper mapper = new ObjectMapper();
-		
+				
 		if (resp.getStatus() == 200) {
 			String output = resp.getEntity(String.class);
 			System.out.println("inside if" + output);
+			
+			try{
+				System.out.println("Inside try::");
+				JSONObject jObject = new JSONObject(output);
+				List<Person> persons = new ObjectMapper().readValue(jObject.getString("values") , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
+				System.out.println("persons"+persons.toString());
+
+			}catch (Exception e) {
+				System.out.println("Exception" + e);
+			}	
 			
 
 		}
@@ -165,6 +171,70 @@ public class CompanyServlet extends HttpServlet {
 	}
 	
 	 
+public void searchCompanies(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+		System.out.println("searchCompanies::");
+		Client client = Client.create();
+		String auth = request.getParameter("auth");
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/company-search?format=json&sort=relevance&oauth2_access_token=" + auth);
+		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
+		System.out.println("resp:::::" + resp);
+				
+		if (resp.getStatus() == 200) {
+			String output = resp.getEntity(String.class);
+			System.out.println("inside if" + output);
+			
+			try{
+				System.out.println("Inside searchCompanies try::");
+				JSONObject jObject = new JSONObject(output);
+				String companies = jObject.getString("companies");
+				System.out.println("companies::"+companies);
+    			JSONObject jObjectcompanies = new JSONObject(companies);
+    			String values = jObjectcompanies.getString("values");
+    			System.out.println("values::"+values);
+				List<Person> persons = new ObjectMapper().readValue(jObjectcompanies.getString("values")  , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
+				System.out.println(" searchCompanies "+persons.toString());
+
+			}catch (Exception e) {
+				System.out.println("Exception" + e);
+			}	
+			
+	     }
+		}
+		
+		public void getFollweCompanies(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+			
+			System.out.println("searchCompanies::");
+			Client client = Client.create();
+			String auth = request.getParameter("auth");
+			WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/following/companies?format=json&oauth2_access_token=" + auth);
+			ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
+			System.out.println("resp:::::" + resp);
+					
+			if (resp.getStatus() == 200) {
+				String output = resp.getEntity(String.class);
+				System.out.println("inside if" + output);
+				
+				try{
+					System.out.println("Inside getFollweCompanies try::");
+					JSONObject jObject = new JSONObject(output);
+					List<Person> persons = new ObjectMapper().readValue(jObject.getString("values") , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
+					System.out.println("getFollweCompanies::"+persons.toString());
+
+				}catch (Exception e) {
+					System.out.println("Exception" + e);
+				}	
+				
+
+			}
+		
+		
+		
+		
+		
+	}
+	
+	
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
