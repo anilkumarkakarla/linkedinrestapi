@@ -21,7 +21,18 @@
         <servlet-class>LinkedInResponse</servlet-class>
     </servlet>
 
+    <servlet>
+		<servlet-name>companyServlet</servlet-name>
+		<servlet-class>CompanyServlet</servlet-class>
+	</servlet>
+    
+    <servlet-mapping>
+		<servlet-name>companyServlet</servlet-name>
+		<url-pattern>/client1</url-pattern>
+	</servlet-mapping>
+    
+    
     <welcome-file-list>
-		<welcome-file>login.jsp</welcome-file>
+		<welcome-file>client.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>
