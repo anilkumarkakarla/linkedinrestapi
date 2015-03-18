@@ -44,7 +44,8 @@ public class CompanyServlet extends HttpServlet {
 		//getCompanyByEmailDomain(request,response);
 		//getCompanyByIdAndUniversalName(request,response);
 		//searchCompanies(request,response);
-		getFollwedCompanies(request,response);
+		//getFollwedCompanies(request,response);
+		getCompanyUpdates(request,response);
 		
 	}
 	
@@ -106,9 +107,7 @@ public class CompanyServlet extends HttpServlet {
 	}
 	
 	public void getCompanyByEmailDomain(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		
-		
-		
+
 		System.out.println("getCompanyByEmailDomain::");
 		Person personInfo = new Person();
 		Client client = Client.create();
@@ -235,6 +234,46 @@ public void searchCompanies(HttpServletRequest request, HttpServletResponse resp
 	}
 	
 	
+		public void getCompanyUpdates(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+			
+			
+			
+			System.out.println(" getCompanyUpdates::");
+			Person personInfo = new Person();
+			Client client = Client.create();
+			String auth = request.getParameter("auth");
+			WebResource webResource = client.resource("https://api.linkedin.com/v1/companies/1337/updates?format=json&oauth2_access_token=" + auth);
+			ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
+			System.out.println("resp:::::" + resp);
+			
+			
+			if (resp.getStatus() == 200) {
+				String output = resp.getEntity(String.class);
+				System.out.println("inside if" + output);
+				
+				/*try{
+					System.out.println("Inside try::");
+					JSONObject jObject = new JSONObject(output);
+					String values = jObject.getString("values");
+					System.out.println("valuesssss::::::"+values);
+					JSONObject innerValues = new JSONObject(values);
+					//System.out.println("innerValues::"+innerValues.getJSONArray("likes").getString(0));
+					//System.out.println("innerValues::"+innerValues.getJSONObject("likes").getString("values"));
+					String invalues = innerValues.getString("likes");
+				   //JSONObject invalues = innerValues.getJSONObject("likes");
+					System.out.println("innerValues::"+invalues);
+					
+					List<Person> persons = new ObjectMapper().readValue(jObject.getString("values") , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
+					System.out.println("persons"+persons.toString());
+
+				}catch (Exception e) {
+					System.out.println("Exception" + e);
+				}	*/
+
+			}
+				
+		}
+
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
