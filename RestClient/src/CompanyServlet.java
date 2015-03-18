@@ -44,7 +44,7 @@ public class CompanyServlet extends HttpServlet {
 		//getCompanyByEmailDomain(request,response);
 		//getCompanyByIdAndUniversalName(request,response);
 		//searchCompanies(request,response);
-		getFollweCompanies(request,response);
+		getFollwedCompanies(request,response);
 		
 	}
 	
@@ -202,7 +202,7 @@ public void searchCompanies(HttpServletRequest request, HttpServletResponse resp
 	     }
 		}
 		
-		public void getFollweCompanies(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		public void getFollwedCompanies(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 			
 			System.out.println("searchCompanies::");
 			Client client = Client.create();
