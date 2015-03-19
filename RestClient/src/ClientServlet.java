@@ -48,7 +48,7 @@ public class ClientServlet extends HttpServlet {
 		//getMyProfileById(request,response);
 		getMyConnection(request,response);
 		//PeopleSearch(request, response);
-		getMyMemberConnectionsById(request, response);
+		//getMyMemberConnectionsById(request, response);
 		//getOutOfNetworkProfile( request, response);
 	}
 

@@ -14,9 +14,25 @@ public class Company {
 	@JsonProperty(value = "name")
 	private String name;
 
+	@JsonProperty(value = "_key")
+	private String key;
+	
+	
+	
 	public String getId() {
 		return id;
 	}
+
+	
+	public String getKey() {
+		return key;
+	}
+
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
 
 	public void setId(String id) {
 		this.id = id;
@@ -34,7 +50,7 @@ public class Company {
 
 	@Override
 	public String toString() {
-		return "Company [id=" + id + ", name=" + name + "]";
+		return "Company [id=" + id + ", name=" + name + ", key=" + key + "]";
 	}
 
 	
