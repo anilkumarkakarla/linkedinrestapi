@@ -36,6 +36,7 @@ public class ClientServlet extends HttpServlet {
 		//getMyProfileById(request,response);
 		getMyConnection(request,response);
 		//PeopleSearch(request, response);
+		getMyMemberConnectionsById(request, response);
 		//getOutOfNetworkProfile(request, response);
 	}
 
@@ -174,7 +175,32 @@ public class ClientServlet extends HttpServlet {
     		}
         } 
  }
-	
+	public void getMyMemberConnectionsById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+		System.out.println("getMyMemberConnectionsById::");
+		Person personInfo = new Person();
+		Client client = Client.create();
+		String auth = request.getParameter("auth");
+		Person person =getMyProfile(request, response);
+		System.out.println("personInfo.Id::"+person.getId());
+		WebResource getMyMemberConnectionsWebResource = client.resource("https://api.linkedin.com/v1/people/id="+person.getId()+"/connections?format=json&modified=new&oauth2_access_token=" + auth);
+		ClientResponse Profile =getMyMemberConnectionsWebResource.accept("text/html").get(ClientResponse.class);
+		System.out.println("resp1:::::" +Profile);
+		if (Profile.getStatus() == 200) {
+			String output = Profile.getEntity(String.class);
+			System.out.println("output " + output);
+			try{
+				System.out.println("Inside getMyMemberConnectionsById try::");
+				JSONObject jObject = new JSONObject(output);
+				List<Person> persons = new ObjectMapper().readValue(jObject.getString("values") , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
+				System.out.println(" inside getMyMemberConnectionsById personInfo::"+ persons);
+			}catch (Exception e) {
+				System.out.println("Exception" + e);
+			}
+
+		}
+
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
