@@ -43,9 +43,9 @@ public class CompanyServlet extends HttpServlet {
 		//getCompanyByUniversalName(request,response);
 		//getCompanyByEmailDomain(request,response);
 		//getCompanyByIdAndUniversalName(request,response);
-		searchCompanies(request,response);
+		//searchCompanies(request,response);
 		//getFollwedCompanies(request,response);
-		//getCompanyUpdates(request,response);
+		getCompanyUpdates(request,response);
 		
 	}
 	
@@ -212,10 +212,11 @@ public Output searchCompanies(HttpServletRequest request, HttpServletResponse re
 		return output;
 		}
 		
-		public void getFollwedCompanies(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		public CompaniesGroup getFollwedCompanies(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 			
-			System.out.println("searchCompanies::");
+			System.out.println("getFollwedCompanies::");
 			Client client = Client.create();
+			CompaniesGroup companies = new CompaniesGroup();
 			String auth = request.getParameter("auth");
 			WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/following/companies?format=json&oauth2_access_token=" + auth);
 			ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
@@ -223,13 +224,14 @@ public Output searchCompanies(HttpServletRequest request, HttpServletResponse re
 					
 			if (resp.getStatus() == 200) {
 				String output = resp.getEntity(String.class);
-				System.out.println("inside if" + output);
+				System.out.println("output::::" + output);
 				
 				try{
 					System.out.println("Inside getFollweCompanies try::");
 					JSONObject jObject = new JSONObject(output);
-					List<Person> persons = new ObjectMapper().readValue(jObject.getString("values") , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
-					System.out.println("getFollweCompanies::"+persons.toString());
+					companies=	new ObjectMapper().readValue(output, CompaniesGroup.class);
+					System.out.println("getFollwedCompanies::::"+companies);
+					return companies;
 
 				}catch (Exception e) {
 					System.out.println("Exception" + e);
@@ -237,6 +239,7 @@ public Output searchCompanies(HttpServletRequest request, HttpServletResponse re
 				
 
 			}
+			return companies;
 		
 		
 		
