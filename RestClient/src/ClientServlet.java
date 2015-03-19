@@ -34,9 +34,9 @@ public class ClientServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//getMyProfile(request,response);
 		//getMyProfileById(request,response);
-		getMyConnection(request,response);
+		//getMyConnection(request,response);
 		//PeopleSearch(request, response);
-		getMyMemberConnectionsById(request, response);
+		//getMyMemberConnectionsById(request, response);
 		//getOutOfNetworkProfile(request, response);
 	}
 
