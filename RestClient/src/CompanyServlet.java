@@ -39,21 +39,21 @@ public class CompanyServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		getCompanyById(request,response);
-		//getCompanyByUniversalName(request,response);
+		//getCompanyById(request,response);
+		getCompanyByUniversalName(request,response);
 		//getCompanyByEmailDomain(request,response);
 		//getCompanyByIdAndUniversalName(request,response);
 		//searchCompanies(request,response);
-		getFollwedCompanies(request,response);
+		//getFollwedCompanies(request,response);
 		//getCompanyUpdates(request,response);
 		
 	}
 	
 	
 	
-	public Person getCompanyById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public Company getCompanyById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("getCompanyById::");
-		Person personInfo = new Person();
+		Company company = new Company();
 		Client client = Client.create();
 		String auth = request.getParameter("auth");
 		
@@ -66,16 +66,16 @@ public class CompanyServlet extends HttpServlet {
 			System.out.println("inside if" + output);
 			try{
 				System.out.println("Inside try::");
-				personInfo = new ObjectMapper().readValue(output, Person.class);
-				System.out.println("personInfo::"+personInfo);
-				return personInfo;
+				company = new ObjectMapper().readValue(output, Company.class);
+				System.out.println("company::::::"+company);
+				return company;
 
 			}catch (Exception e) {
 				System.out.println("Exception" + e);
 			}
 
 		}
-		return personInfo;
+		return company;
 
 	}	
 	
