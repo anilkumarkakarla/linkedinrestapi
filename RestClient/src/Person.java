@@ -1,99 +1,107 @@
 
-
-
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 
-
 @JsonPropertyOrder({"id","firstName", "lastName", "url"})
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Person {
+
+	@JsonProperty(value = "id")	
+	private String id;
+
+	@JsonProperty(value = "firstName")
+	private String firstName;
+
+	@JsonProperty(value = "lastName")	
+	private String lastName;
+
+	@JsonProperty(value = "industry")
+	private String industry;
+
+	@JsonProperty(value = "headline")
+	private String headline;
+
+	@JsonProperty(value = "pictureUrl")
+	private String pictureUrl;
+
+	/*@JsonProperty(value = "siteStandardProfileRequest")
+	private String siteStandardProfileRequest;*/
 	
-@JsonProperty(value = "firstName")
-private String firstName;
+	@JsonProperty(value="location")
+	private Location location;
 
+	public String getId() {
+		return id;
+	}
 
-@JsonProperty(value = "headline")
- private String headline;
+	public void setId(String id) {
+		this.id = id;
+	}
 
+	public String getFirstName() {
+		return firstName;
+	}
 
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-@JsonProperty(value = "id")	
-private String id;
+	public String getLastName() {
+		return lastName;
+	}
 
- 
-@JsonProperty(value = "lastName")	
-private String lastName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-@JsonProperty(value = "url")
- private String url;
+	public String getIndustry() {
+		return industry;
+	}
 
+	public void setIndustry(String industry) {
+		this.industry = industry;
+	}
 
+	public String getHeadline() {
+		return headline;
+	}
 
-@JsonProperty(value = "industry")
-private String industry;
+	public void setHeadline(String headline) {
+		this.headline = headline;
+	}
 
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
 
-@JsonProperty(value = "name")
-private String name;
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
 
+	/*public String getSiteStandardProfileRequest() {
+		return siteStandardProfileRequest;
+	}
 
+	public void setSiteStandardProfileRequest(String siteStandardProfileRequest) {
+		this.siteStandardProfileRequest = siteStandardProfileRequest;
+	}*/
 
-public String getName() {
-	return name;
-}
+	public Location getLocation() {
+		return location;
+	}
 
-public void setName(String name) {
-	this.name = name;
-}
+	public void setLocation(Location location) {
+		this.location = location;
+	}
 
-public String getFirstName() {
-	return firstName;
-}
-
-public void setFirstName(String firstName) {
-	this.firstName = firstName;
-}
-
-public String getHeadline() {
-	return headline;
-}
-
-public void setHeadline(String headline) {
-	this.headline = headline;
-}
-
-public String getId() {
-	return id;
-}
-
-public void setId(String id) {
-	this.id = id;
-}
-
-public String getLastName() {
-	return lastName;
-}
-
-public void setLastName(String lastName) {
-	this.lastName = lastName;
-}
-
-public String getUrl() {
-	return url;
-}
-
-public void setUrl(String url) {
-	this.url = url;
-}
-
-@Override
-public String toString() {
-	return "Person [firstName=" + firstName + ", headline=" + headline
-			+ ", id=" + id + ", lastName=" + lastName + ", url=" + url
-			+ ", industry=" + industry + ", name=" + name + "]";
-}
-
+	@Override
+	public String toString() {
+		return "Person [id=" + id + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", industry=" + industry + ", headline="
+				+ headline + ", pictureUrl=" + pictureUrl
+				/*+ ", siteStandardProfileRequest=" + siteStandardProfileRequest*/
+				+ ", location=" + location + "]";
+	}
 
 }

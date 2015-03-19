@@ -30,31 +30,14 @@ public class ClientServlet extends HttpServlet {
 		super();
 	}
 
-	/*protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Inside goGet method");
-        LinkedInOAuthService oauthService = LinkedInOAuthServiceFactory.getInstance().createLinkedInOAuthService("77ywtoz3eay8jk", "qvP3Jh0mHBkUs80i");
-        System.out.println("oauthService String::" + oauthService.toString());
-        System.out.println("oauthService::" + oauthService.getOAuthRequestToken());
-        System.out.println("oauthService::" + oauthService.getRequestHeaders());
-        LinkedInRequestToken requestToken = oauthService.getOAuthRequestToken("http://localhost:8010/RestClient/callback");
-        String authUrl = requestToken.getAuthorizationUrl();
-        System.out.println("authUrl::" + authUrl);
-    }
-	 */
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//getMyProfile(request,response);
 		//getMyProfileById(request,response);
-		//getMyConnections(request,response);
+		getMyConnection(request,response);
 		//PeopleSearch(request, response);
-		getOutOfNetworkProfile( request, response);
+		//getOutOfNetworkProfile(request, response);
 	}
-
-
-
-	
-
 
 	
 	public Person getMyProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -114,8 +97,9 @@ public class ClientServlet extends HttpServlet {
 		
 	}
 
-	public void getMyConnections(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public Connection getMyConnection(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("getMyConnections::");
+		Connection connection = new Connection();
 		Client client = Client.create();
 		String auth = request.getParameter("auth");
 		WebResource getMyconnectionsWebResource = client.resource("https://api.linkedin.com/v1/people/~/connections?format=json&modified=new&oauth2_access_token=" + auth);
@@ -127,12 +111,16 @@ public class ClientServlet extends HttpServlet {
 			try{
 				System.out.println("Inside try::");
 				JSONObject jObject = new JSONObject(output);
-				List<Person> persons = new ObjectMapper().readValue(jObject.getString("values") , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
-				System.out.println("personInfo::"+persons);
+				//connection = new ObjectMapper().readValue(output , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
+				//connection = new ObjectMapper().readValue(output , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Connection.class));
+				connection=	new ObjectMapper().readValue(output, Connection.class);
+				System.out.println("connections::::"+connection);
+				return connection;
 			}catch (Exception e) {
 				System.out.println("Exception" + e);
 			}
-		} 
+		}
+		return connection; 
 	}
 	
 	public void getOutOfNetworkProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

@@ -44,7 +44,7 @@ public class CompanyServlet extends HttpServlet {
 		//getCompanyByEmailDomain(request,response);
 		//getCompanyByIdAndUniversalName(request,response);
 		//searchCompanies(request,response);
-		getFollwedCompanies(request,response);
+		//getFollwedCompanies(request,response);
 		
 	}
 	
