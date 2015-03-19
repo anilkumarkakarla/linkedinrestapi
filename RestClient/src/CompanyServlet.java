@@ -39,13 +39,13 @@ public class CompanyServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//getCompanyById(request,response);
+		getCompanyById(request,response);
 		//getCompanyByUniversalName(request,response);
 		//getCompanyByEmailDomain(request,response);
 		//getCompanyByIdAndUniversalName(request,response);
 		//searchCompanies(request,response);
-		//getFollwedCompanies(request,response);
-		getCompanyUpdates(request,response);
+		getFollwedCompanies(request,response);
+		//getCompanyUpdates(request,response);
 		
 	}
 	
