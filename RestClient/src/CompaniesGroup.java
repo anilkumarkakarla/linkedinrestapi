@@ -18,6 +18,20 @@ public class CompaniesGroup {
 	
 	@JsonProperty(value = "_total")
 	private int total;	
+	
+	
+	@JsonProperty(value = "values")
+	private List<CompanyValues> companyValues;
+	
+
+	public List<CompanyValues> getCompanyUpdatesComments() {
+		return companyValues;
+	}
+
+	public void setCompanyUpdatesComments(
+			List<CompanyValues> companyValues) {
+		this.companyValues = companyValues;
+	}
 
 	public int getCount() {
 		return count;
@@ -35,7 +49,7 @@ public class CompaniesGroup {
 		this.start = start;
 	}
 
-	@JsonProperty(value = "values")
+	//@JsonProperty(value = "values")
 	private List<Company> companies;
 
 	public int getTotal() {
@@ -48,9 +62,12 @@ public class CompaniesGroup {
 
 	@Override
 	public String toString() {
-		return "Companies [count=" + count + ", start=" + start + ", total="
-				+ total + ", companies=" + companies + "]";
+		return "CompaniesGroup [count=" + count + ", start=" + start
+				+ ", total=" + total + ", companyValues="
+				+ companyValues + ", companies=" + companies + "]";
 	}
+
+	
 
 	
 

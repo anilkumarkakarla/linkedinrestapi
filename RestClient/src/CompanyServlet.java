@@ -45,8 +45,8 @@ public class CompanyServlet extends HttpServlet {
 		//getCompanyByIdAndUniversalName(request,response);
 		//searchCompanies(request,response);
 		//getFollwedCompanies(request,response);
-		getCompanyUpdates(request,response);
-		
+		//getCompanyUpdates(request,response);
+		 getStartFollowingCompanies(request,response);
 	}
 	
 	
@@ -248,13 +248,13 @@ public Output searchCompanies(HttpServletRequest request, HttpServletResponse re
 	}
 	
 	
-		public void getCompanyUpdates(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		public CompaniesGroup getCompanyUpdates(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 			
 			
 			
 			System.out.println(" getCompanyUpdates::");
-			Person personInfo = new Person();
 			Client client = Client.create();
+			CompaniesGroup companies = new CompaniesGroup();	
 			String auth = request.getParameter("auth");
 			WebResource webResource = client.resource("https://api.linkedin.com/v1/companies/1337/updates?format=json&oauth2_access_token=" + auth);
 			ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
@@ -263,12 +263,12 @@ public Output searchCompanies(HttpServletRequest request, HttpServletResponse re
 			
 			if (resp.getStatus() == 200) {
 				String output = resp.getEntity(String.class);
-				System.out.println("inside if" + output);
+				System.out.println("output:::::" + output);
 				
-				/*try{
-					System.out.println("Inside try::");
+				try{
+					System.out.println("Inside  getCompanyUpdates  try::");
 					JSONObject jObject = new JSONObject(output);
-					String values = jObject.getString("values");
+					/*String values = jObject.getString("values");
 					System.out.println("valuesssss::::::"+values);
 					JSONObject innerValues = new JSONObject(values);
 					//System.out.println("innerValues::"+innerValues.getJSONArray("likes").getString(0));
@@ -278,17 +278,53 @@ public Output searchCompanies(HttpServletRequest request, HttpServletResponse re
 					System.out.println("innerValues::"+invalues);
 					
 					List<Person> persons = new ObjectMapper().readValue(jObject.getString("values") , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
-					System.out.println("persons"+persons.toString());
+					System.out.println("persons"+persons.toString());*/
+					
+					
+					companies=	new ObjectMapper().readValue(output, CompaniesGroup.class);
+					System.out.println("getCompanyUpdates::::"+companies);
+					return companies;
 
 				}catch (Exception e) {
 					System.out.println("Exception" + e);
-				}	*/
+					e.printStackTrace();
+					
+				}	
 
 			}
+			 return companies;	
+		} 
+		
+public CompaniesGroup getStartFollowingCompanies(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+			
+			System.out.println(" getStartFollowingCompanies::");
+			Client client = Client.create();
+			CompaniesGroup companies = new CompaniesGroup();
+			String auth = request.getParameter("auth");
+			WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/following/companies?format=json&oauth2_access_token=" + auth);
+			ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
+			System.out.println("resp:::::" + resp);
+					
+			if (resp.getStatus() == 200) {
+				String output = resp.getEntity(String.class);
+				System.out.println("output::::" + output);
 				
-		}
+				try{
+					System.out.println("Inside getStartFollowingCompanies try::");
+					JSONObject jObject = new JSONObject(output);
+					companies=	new ObjectMapper().readValue(output, CompaniesGroup.class);
+					System.out.println("getStartFollowingCompanies::::"+companies);
+					return companies;
 
-	
+				}catch (Exception e) {
+					System.out.println("Exception" + e);
+				}	
+				
+
+			}
+			return companies;
+		
+}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

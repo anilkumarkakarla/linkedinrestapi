@@ -28,9 +28,27 @@ public class Person {
 	@JsonProperty(value = "url")
 	private String url;
 
+	@JsonProperty(value = "apiStandardProfileRequest")
+	private ApiStandardProfileRequest apiStandardProfileRequest;
 
 
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public ApiStandardProfileRequest getApiStandardProfileRequest() {
+		return apiStandardProfileRequest;
+	}
+
+	public void setApiStandardProfileRequest(
+			ApiStandardProfileRequest apiStandardProfileRequest) {
+		this.apiStandardProfileRequest = apiStandardProfileRequest;
+	}
 
 	@JsonProperty(value = "pictureUrl")
 	private String pictureUrl;
@@ -109,9 +127,20 @@ public void setSiteStandardProfileRequest(String siteStandardProfileRequest) {
 	public String toString() {
 		return "Person [id=" + id + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", industry=" + industry + ", headline="
-				+ headline + ", pictureUrl=" + pictureUrl
-				/*+ ", siteStandardProfileRequest=" + siteStandardProfileRequest*/
+				+ headline + ", url=" + url + ", apiStandardProfileRequest="
+				+ apiStandardProfileRequest + ", pictureUrl=" + pictureUrl
 				+ ", location=" + location + "]";
 	}
+
+	/*@Override
+	public String toString() {
+		return "Person [id=" + id + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", industry=" + industry + ", headline="
+				+ headline + ", pictureUrl=" + pictureUrl
+				+ ", siteStandardProfileRequest=" + siteStandardProfileRequest
+				+ ", location=" + location + "]";
+	}
+*/
+
 
 }
