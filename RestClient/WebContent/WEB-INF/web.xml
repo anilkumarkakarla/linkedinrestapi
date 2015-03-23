@@ -10,7 +10,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>clientServlet</servlet-name>
-		<url-pattern>/client</url-pattern>
+		<url-pattern>/client1</url-pattern>
 	</servlet-mapping>
     <servlet-mapping>
         <servlet-name>linkedInResponse</servlet-name>
@@ -28,7 +28,18 @@
     
     <servlet-mapping>
 		<servlet-name>companyServlet</servlet-name>
-		<url-pattern>/client1</url-pattern>
+		<url-pattern>/client2</url-pattern>
+	</servlet-mapping>
+    
+    
+    <servlet>
+		<servlet-name>jobServlet</servlet-name>
+		<servlet-class>JobServlet</servlet-class>
+	</servlet>
+    
+    <servlet-mapping>
+		<servlet-name>jobServlet</servlet-name>
+		<url-pattern>/client</url-pattern>
 	</servlet-mapping>
     
     
