@@ -44,9 +44,21 @@ public class ClientServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String authUrl = null;
+		try{
+			authUrl = "https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=77ywtoz3eay8jk&scope=rw_groups%20w_messages%20r_basicprofile%20r_contactinfo%20r_network"
+					+ "&state=qvP3Jh0mHBkUs80i&redirect_uri=http://localhost:8080/RestClient/callback";
+
+		}catch (Exception e) {
+			e.printStackTrace();  
+		}
+		response.sendRedirect(authUrl);
+
+
 		//getMyProfile(request,response);
 		//getMyProfileById(request,response);
-		getMyConnection(request,response);
+		//getMyConnection(request,response);
 		//PeopleSearch(request, response);
 		//getMyMemberConnectionsById(request, response);
 		//getOutOfNetworkProfile( request, response);
@@ -163,9 +175,9 @@ public class ClientServlet extends HttpServlet {
 			}
 		} 
 	}
-	
-	
-	
+
+
+
 
 	public void PeopleSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("PeopleSearch::");
@@ -190,10 +202,10 @@ public class ClientServlet extends HttpServlet {
 			}catch (Exception e) {
 				System.out.println("Exception" + e);
 			}
-        } 
+		} 
 
 
- }
+	}
 
 	public void getMyMemberConnectionsById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
