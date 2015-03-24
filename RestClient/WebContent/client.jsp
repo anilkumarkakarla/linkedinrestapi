@@ -9,8 +9,7 @@
 <body>
   
   <form action="client" method="get">
-    Id :<input type="text" name="auth" value="AQU16-0jJl-RozSqZXY74fSL3Vaam35aQDv-vBN3T8aCayAlCKpt_Td9bnzdkIyCr8xJNnPl_D8rg9T7_O_BIudhNqwEaCqo5KmIBm7bR_rurLUbT1wcYvLToPVk7aMLvwPxQRV4-yJ01ISkvGSNoAVVfqmc4q97RMMoV2Er03M3wrHDhko">
-    <!-- Url :<input type="text" name="url"> -->
+    Id :<input type="text" name="auth" value="AQUgvgHpe8dO_Hspf-YLuEvOVsHQfEbmcPj_jCZCjchef6MSF1qJzvt8OX2wKDLxNTU1ET_xkKvv9rsD-cSIhO6QXXsSL2HUauwgEIjtolEzKh4olN1dd-JNLGmq6BuFOuRRhfO1rqReq5T-X1nNZO81wIOY1TByGoQ1Y7JnB4-Ck3v2vcI">
     <input type="submit" value="Submit">
   </form>
 

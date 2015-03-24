@@ -9,62 +9,45 @@ import org.codehaus.jackson.annotate.JsonPropertyOrder;
 @JsonPropertyOrder({"id","firstName", "lastName", "url"})
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Person {
-	@JsonProperty(value = "id")	
-	private String id;
 
 	@JsonProperty(value = "firstName")
 	private String firstName;
 
 
-	@JsonProperty(value = "lastName")	
-	private String lastName;
-
-	@JsonProperty(value = "industry")
-	private String industry;
-
 	@JsonProperty(value = "headline")
 	private String headline;
+
+
+
+	@JsonProperty(value = "id")	
+	private String id;
+
+
+	@JsonProperty(value = "lastName")	
+	private String lastName;
 
 	@JsonProperty(value = "url")
 	private String url;
 
+
 	@JsonProperty(value = "apiStandardProfileRequest")
 	private ApiStandardProfileRequest apiStandardProfileRequest;
 
+	@JsonProperty(value = "industry")
+	private String industry;
 
+	@JsonProperty(value = "name")
+	private String name;
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public ApiStandardProfileRequest getApiStandardProfileRequest() {
-		return apiStandardProfileRequest;
-	}
-
-	public void setApiStandardProfileRequest(
-			ApiStandardProfileRequest apiStandardProfileRequest) {
-		this.apiStandardProfileRequest = apiStandardProfileRequest;
-	}
-
-	@JsonProperty(value = "pictureUrl")
-	private String pictureUrl;
-
-	/*@JsonProperty(value = "siteStandardProfileRequest")
-private String siteStandardProfileRequest;*/
-
-	@JsonProperty(value="location")
+	@JsonProperty(value = "location")
 	private Location location;
 
-	public String getId() {
-		return id;
+	public String getName() {
+		return name;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getFirstName() {
@@ -75,22 +58,6 @@ private String siteStandardProfileRequest;*/
 		this.firstName = firstName;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getIndustry() {
-		return industry;
-	}
-
-	public void setIndustry(String industry) {
-		this.industry = industry;
-	}
-
 	public String getHeadline() {
 		return headline;
 	}
@@ -99,21 +66,38 @@ private String siteStandardProfileRequest;*/
 		this.headline = headline;
 	}
 
-	public String getPictureUrl() {
-		return pictureUrl;
+	public String getId() {
+		return id;
 	}
 
-	public void setPictureUrl(String pictureUrl) {
-		this.pictureUrl = pictureUrl;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	/*public String getSiteStandardProfileRequest() {
-	return siteStandardProfileRequest;
-}
+	public String getLastName() {
+		return lastName;
+	}
 
-public void setSiteStandardProfileRequest(String siteStandardProfileRequest) {
-	this.siteStandardProfileRequest = siteStandardProfileRequest;
-}*/
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+
+	public ApiStandardProfileRequest getApiStandardProfileRequest() {
+		return apiStandardProfileRequest;
+	}
+
+	public void setApiStandardProfileRequest(ApiStandardProfileRequest apiStandardProfileRequest) {
+		this.apiStandardProfileRequest = apiStandardProfileRequest;
+	}
 
 	public Location getLocation() {
 		return location;
@@ -128,19 +112,8 @@ public void setSiteStandardProfileRequest(String siteStandardProfileRequest) {
 		return "Person [id=" + id + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", industry=" + industry + ", headline="
 				+ headline + ", url=" + url + ", apiStandardProfileRequest="
-				+ apiStandardProfileRequest + ", pictureUrl=" + pictureUrl
+				+ apiStandardProfileRequest
 				+ ", location=" + location + "]";
 	}
-
-	/*@Override
-	public String toString() {
-		return "Person [id=" + id + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", industry=" + industry + ", headline="
-				+ headline + ", pictureUrl=" + pictureUrl
-				+ ", siteStandardProfileRequest=" + siteStandardProfileRequest
-				+ ", location=" + location + "]";
-	}
-*/
-
 
 }

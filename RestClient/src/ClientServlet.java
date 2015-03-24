@@ -1,8 +1,5 @@
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,14 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 import org.codehaus.jettison.json.JSONObject;
 
-import com.google.code.linkedinapi.client.oauth.LinkedInOAuthService;
-import com.google.code.linkedinapi.client.oauth.LinkedInOAuthServiceFactory;
-import com.google.code.linkedinapi.client.oauth.LinkedInRequestToken;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -30,23 +22,23 @@ public class ClientServlet extends HttpServlet {
 		super();
 	}
 
-	/*protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Inside goGet method");
-        LinkedInOAuthService oauthService = LinkedInOAuthServiceFactory.getInstance().createLinkedInOAuthService("77ywtoz3eay8jk", "qvP3Jh0mHBkUs80i");
-        System.out.println("oauthService String::" + oauthService.toString());
-        System.out.println("oauthService::" + oauthService.getOAuthRequestToken());
-        System.out.println("oauthService::" + oauthService.getRequestHeaders());
-        LinkedInRequestToken requestToken = oauthService.getOAuthRequestToken("http://localhost:8010/RestClient/callback");
-        String authUrl = requestToken.getAuthorizationUrl();
-        System.out.println("authUrl::" + authUrl);
-    }
-	 */
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String authUrl = null;
+		try{
+			authUrl = "https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=77ywtoz3eay8jk&scope=rw_groups%20w_messages%20r_basicprofile%20r_contactinfo%20r_network"
+					+ "&state=qvP3Jh0mHBkUs80i&redirect_uri=http://localhost:8080/RestClient/callback";
+
+		}catch (Exception e) {
+			e.printStackTrace();  
+		}
+		response.sendRedirect(authUrl);
+
+
 		//getMyProfile(request,response);
 		//getMyProfileById(request,response);
-		getMyConnection(request,response);
+		//getMyConnection(request,response);
 		//PeopleSearch(request, response);
 		//getMyMemberConnectionsById(request, response);
 		//getOutOfNetworkProfile( request, response);
@@ -164,6 +156,9 @@ public class ClientServlet extends HttpServlet {
 		} 
 	}
 
+
+
+
 	public void PeopleSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("PeopleSearch::");
 		Client client = Client.create();
@@ -187,10 +182,10 @@ public class ClientServlet extends HttpServlet {
 			}catch (Exception e) {
 				System.out.println("Exception" + e);
 			}
-		}
+		} 
 
 
-	} 
+	}
 
 	public void getMyMemberConnectionsById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 

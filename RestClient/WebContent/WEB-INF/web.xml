@@ -12,20 +12,31 @@
 		<servlet-name>clientServlet</servlet-name>
 		<url-pattern>/client1</url-pattern>
 	</servlet-mapping>
+	
+	<!-- <servlet>
+		<servlet-name>companyServlet</servlet-name>
+		<servlet-class>CompanyServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+		<servlet-name>companyServlet</servlet-name>
+		<url-pattern>/client</url-pattern>
+	</servlet-mapping> -->
+    
+   
+   <servlet>
+        <servlet-name>linkedInResponse</servlet-name>
+        <servlet-class>LinkedinResponse</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>linkedInResponse</servlet-name>
         <url-pattern>/callback</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>linkedInResponse</servlet-name>
-        <servlet-class>LinkedInResponse</servlet-class>
-    </servlet>
-
-    <servlet>
-		<servlet-name>companyServlet</servlet-name>
-		<servlet-class>CompanyServlet</servlet-class>
-	</servlet>
     
+    
+    <servlet>
+        <servlet-name>accessTokenRequest</servlet-name>
+        <servlet-class>AccessTokenRequest</servlet-class>
+    </servlet>
     <servlet-mapping>
 		<servlet-name>companyServlet</servlet-name>
 		<url-pattern>/client2</url-pattern>
@@ -41,9 +52,12 @@
 		<servlet-name>jobServlet</servlet-name>
 		<url-pattern>/client</url-pattern>
 	</servlet-mapping>
-    
+    <servlet-mapping>
+    <servlet-name>accessTokenRequest</servlet-name>
+        <url-pattern>/requestToken</url-pattern>
+    </servlet-mapping> 
     
     <welcome-file-list>
-		<welcome-file>client.jsp</welcome-file>
+		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>

@@ -1,6 +1,5 @@
 import org.codehaus.jackson.annotate.JsonProperty;
 
-
 public class ApiStandardProfileRequest {
 	
 	@JsonProperty(value = "headers")
