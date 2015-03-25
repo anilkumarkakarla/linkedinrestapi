@@ -200,61 +200,67 @@ public class CompanyServlet extends HttpServlet {
 			}catch (Exception e) {
 				System.out.println("Exception" + e);
 			}	
-
+			
+	     }
 		}
+		
+		public GetFollowedCompany getFollwedCompanies(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
+			
+			System.out.println("getFollwedCompanies::");
+			Client client = Client.create();
+			GetFollowedCompany company = new GetFollowedCompany();
+			//String auth = request.getParameter("auth");
+			WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/following/companies?format=json&oauth2_access_token=" + accessToken);
+			ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
+			System.out.println("resp:::::" + resp);
+					
+			if (resp.getStatus() == 200) {
+				String output = resp.getEntity(String.class);
+				System.out.println("output::::" + output);
+				
+				try{
+					System.out.println("Inside getFollweCompanies try::");
+					JSONObject jObject = new JSONObject(output);
+					//List<Company> company = new ObjectMapper().readValue(jObject.getString("values") , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
+
+					company=	new ObjectMapper().readValue(output, GetFollowedCompany.class);
+					System.out.println("getFollweCompanies::"+company);
+
+				}catch (Exception e) {
+					System.out.println("Exception" + e);
+				}	
+				
+
+			}
+			return company;
+		
+		
+		
+		
+		
 	}
-
-	public void getFollwedCompanies(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
-
-		System.out.println("getFollwedCompanies::");
-		Client client = Client.create();
-		WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/following/companies?format=json&oauth2_access_token=" + accessToken);
-		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
-		System.out.println("resp:::::" + resp);
-
-		if (resp.getStatus() == 200) {
-			String output = resp.getEntity(String.class);
-			System.out.println("inside if" + output);
-
-			try{
-				System.out.println("Inside getFollweCompanies try::");
-				JSONObject jObject = new JSONObject(output);
-				List<Person> persons = new ObjectMapper().readValue(jObject.getString("values") , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
-				System.out.println("getFollweCompanies::"+persons.toString());
-
-			}catch (Exception e) {
-				System.out.println("Exception" + e);
-			}	
-
-
-		}
-
-
-
-
-
-	}
-
-	public CompaniesGroup getCompanyUpdates(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
-
-
-
-		System.out.println(" getCompanyUpdates::");
-		Client client = Client.create();
-		CompaniesGroup companies = new CompaniesGroup();	
-		WebResource webResource = client.resource("https://api.linkedin.com/v1/companies/1337/updates?format=json&oauth2_access_token=" + accessToken);
-		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
-		System.out.println("resp:::::" + resp);
-
-
-		if (resp.getStatus() == 200) {
-			String output = resp.getEntity(String.class);
-			System.out.println("output:::::" + output);
-
-			try{
-				System.out.println("Inside  getCompanyUpdates  try::");
-				JSONObject jObject = new JSONObject(output);
-				/*String values = jObject.getString("values");
+	
+		public CompaniesGroup getCompanyUpdates(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
+			
+			
+			
+			System.out.println(" getCompanyUpdates::");
+			Client client = Client.create();
+			CompaniesGroup companies = new CompaniesGroup();	
+			//String auth = request.getParameter("auth");
+			WebResource webResource = client.resource("https://api.linkedin.com/v1/companies/1337/updates?format=json&oauth2_access_token=" + accessToken);
+			ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
+			System.out.println("resp:::::" + resp);
+			
+			
+			if (resp.getStatus() == 200) {
+				String output = resp.getEntity(String.class);
+				System.out.println("output:::::" + output);
+				
+				try{
+					System.out.println("Inside  getCompanyUpdates  try::");
+					JSONObject jObject = new JSONObject(output);
+					/*String values = jObject.getString("values");
 					System.out.println("valuesssss::::::"+values);
 					JSONObject innerValues = new JSONObject(values);
 					//System.out.println("innerValues::"+innerValues.getJSONArray("likes").getString(0));
