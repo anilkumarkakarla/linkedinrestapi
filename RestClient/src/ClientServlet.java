@@ -109,7 +109,7 @@ public class ClientServlet extends HttpServlet {
 			System.out.println("output::::" + output);
 			try{
 				System.out.println("Inside try::");
-				JSONObject jObject = new JSONObject(output);
+				//JSONObject jObject = new JSONObject(output);
 				//connection = new ObjectMapper().readValue(output , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
 				//connection = new ObjectMapper().readValue(output , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Connection.class));
 				connection=	new ObjectMapper().readValue(output, Connection.class);
