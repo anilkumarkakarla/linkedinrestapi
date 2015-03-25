@@ -204,7 +204,6 @@ public class CompanyServlet extends HttpServlet {
 			System.out.println("getFollwedCompanies::");
 			Client client = Client.create();
 			GetFollowedCompany company = new GetFollowedCompany();
-			//String auth = request.getParameter("auth");
 			WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/following/companies?format=json&oauth2_access_token=" + accessToken);
 			ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 			System.out.println("resp:::::" + resp);
@@ -242,7 +241,6 @@ public class CompanyServlet extends HttpServlet {
 			System.out.println(" getCompanyUpdates::");
 			Client client = Client.create();
 			CompaniesGroup companies = new CompaniesGroup();	
-			//String auth = request.getParameter("auth");
 			WebResource webResource = client.resource("https://api.linkedin.com/v1/companies/1337/updates?format=json&oauth2_access_token=" + accessToken);
 			ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 			System.out.println("resp:::::" + resp);

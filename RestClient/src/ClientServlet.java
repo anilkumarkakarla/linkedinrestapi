@@ -35,13 +35,6 @@ public class ClientServlet extends HttpServlet {
 		}
 		response.sendRedirect(authUrl);
 
-
-		//getMyProfile(request,response);
-		//getMyProfileById(request,response);
-		//getMyConnection(request,response);
-		//PeopleSearch(request, response);
-		//getMyMemberConnectionsById(request, response);
-		//getOutOfNetworkProfile( request, response);
 	}
 
 
