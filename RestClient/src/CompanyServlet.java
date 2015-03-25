@@ -56,7 +56,6 @@ public class CompanyServlet extends HttpServlet {
 		System.out.println("getCompanyById::");
 		Person personInfo = new Person();
 		Client client = Client.create();
-		//String auth = request.getParameter("auth");
 
 
 		WebResource webResource = client.resource("https://api.linkedin.com/v1/companies/id=1009?format=json&oauth2_access_token=" + accessToken);
@@ -86,7 +85,6 @@ public class CompanyServlet extends HttpServlet {
 		System.out.println("getCompanyByUniversalName::");
 		Person personInfo = new Person();
 		Client client = Client.create();
-		//String auth = request.getParameter("auth");
 		WebResource webResource = client.resource("https://api.linkedin.com/v1/companies/universal-name=linkedin?format=json&oauth2_access_token=" + accessToken);
 		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + resp);
@@ -114,7 +112,6 @@ public class CompanyServlet extends HttpServlet {
 		System.out.println("getCompanyByEmailDomain::");
 		Person personInfo = new Person();
 		Client client = Client.create();
-		//String auth = request.getParameter("auth");
 		WebResource webResource = client.resource("https://api.linkedin.com/v1/companies?format=json&email-domain=linkedin.com&oauth2_access_token=" + accessToken);
 		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + resp);
@@ -148,7 +145,6 @@ public class CompanyServlet extends HttpServlet {
 
 		System.out.println("getCompanyByIdAndUniversalName::");
 		Client client = Client.create();
-		//String auth = request.getParameter("auth");
 		WebResource webResource = client.resource("https://api.linkedin.com/v1/companies::(162479,universal-name=linkedin)?format=json&oauth2_access_token=" + accessToken);
 		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + resp);
@@ -177,7 +173,6 @@ public class CompanyServlet extends HttpServlet {
 
 		System.out.println("searchCompanies::");
 		Client client = Client.create();
-		//String auth = request.getParameter("auth");
 		WebResource webResource = client.resource("https://api.linkedin.com/v1/company-search?format=json&sort=relevance&oauth2_access_token=" + accessToken);
 		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + resp);
