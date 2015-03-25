@@ -13,7 +13,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 
-@WebServlet("/CompanyServlet")
+@WebServlet("/JobServlet")
 public class JobServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -24,19 +24,44 @@ public class JobServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		getJob(request,response);
+	}
+	
+	
+	public JobBookmark getJobBookmark(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
+		System.out.println("JobBookmark::");
+		JobBookmark jobBookmark = new JobBookmark();
+		Client client = Client.create();
+		
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/job-bookmarks?format=json&oauth2_access_token=" + accessToken);
+		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
+		System.out.println("resp:::::" + resp);
+		if (resp.getStatus() == 200) {
+			String output = resp.getEntity(String.class);
+			System.out.println("output:::::::" + output);
+			try{
+				System.out.println("Inside try::");
+				jobBookmark = new ObjectMapper().readValue(output, JobBookmark.class);
+				System.out.println("company::::::"+jobBookmark);
+				return jobBookmark;
+
+			}catch (Exception e) {
+				System.out.println("Exception" + e);
+				e.printStackTrace();
+			}
+
+		}
+		return jobBookmark;
+
 	}
 
 
 
-	public Jobs getJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public Jobs getJob(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
 		System.out.println("getJob::");
 		Jobs jobs = new Jobs();
 		Client client = Client.create();
-		String auth = request.getParameter("auth");
 
-
-		WebResource webResource = client.resource("https://api.linkedin.com/v1/jobs/1337?format=json&oauth2_access_token=" + auth);
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/jobs/1337?format=json&oauth2_access_token=" + accessToken);
 		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + resp);
 		if (resp.getStatus() == 200) {
