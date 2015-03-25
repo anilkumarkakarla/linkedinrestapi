@@ -204,10 +204,11 @@ public void searchCompanies(HttpServletRequest request, HttpServletResponse resp
 	     }
 		}
 		
-		public void getFollwedCompanies(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
+		public GetFollowedCompany getFollwedCompanies(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
 			
-			System.out.println("searchCompanies::");
+			System.out.println("getFollwedCompanies::");
 			Client client = Client.create();
+			GetFollowedCompany company = new GetFollowedCompany();
 			//String auth = request.getParameter("auth");
 			WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/following/companies?format=json&oauth2_access_token=" + accessToken);
 			ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
@@ -215,13 +216,15 @@ public void searchCompanies(HttpServletRequest request, HttpServletResponse resp
 					
 			if (resp.getStatus() == 200) {
 				String output = resp.getEntity(String.class);
-				System.out.println("inside if" + output);
+				System.out.println("output::::" + output);
 				
 				try{
 					System.out.println("Inside getFollweCompanies try::");
 					JSONObject jObject = new JSONObject(output);
-					List<Person> persons = new ObjectMapper().readValue(jObject.getString("values") , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
-					System.out.println("getFollweCompanies::"+persons.toString());
+					//List<Company> company = new ObjectMapper().readValue(jObject.getString("values") , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
+
+					company=	new ObjectMapper().readValue(output, GetFollowedCompany.class);
+					System.out.println("getFollweCompanies::"+company);
 
 				}catch (Exception e) {
 					System.out.println("Exception" + e);
@@ -229,6 +232,7 @@ public void searchCompanies(HttpServletRequest request, HttpServletResponse resp
 				
 
 			}
+			return company;
 		
 		
 		
