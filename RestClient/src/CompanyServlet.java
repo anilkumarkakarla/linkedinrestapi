@@ -54,11 +54,10 @@ public class CompanyServlet extends HttpServlet {
 
 	public Company getCompanyById(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
 		System.out.println("getCompanyById::");
-			Company company = new Company();
+		Company company = new Company(); 
 		Client client = Client.create();
-		
-		
-		
+
+
 		WebResource webResource = client.resource("https://api.linkedin.com/v1/companies/id=1009?format=json&oauth2_access_token=" + accessToken);
 		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + resp);
@@ -124,7 +123,6 @@ public class CompanyServlet extends HttpServlet {
 
 			try{
 				System.out.println("Inside try::");
-				JSONObject jObject = new JSONObject(output);
 				companies=	new ObjectMapper().readValue(output, CompaniesGroup.class);
 				System.out.println("companies::::"+companies);
 				return companies;
@@ -135,7 +133,6 @@ public class CompanyServlet extends HttpServlet {
 
 		}
 		return companies;
-			
 	}
 
 
@@ -149,29 +146,28 @@ public class CompanyServlet extends HttpServlet {
 		System.out.println("getCompanyByIdAndUniversalName::");
 		Client client = Client.create();
 		CompaniesGroup companies = new CompaniesGroup();
-	
 		WebResource webResource = client.resource("https://api.linkedin.com/v1/companies::(162479,universal-name=linkedin)?format=json&oauth2_access_token=" + accessToken);
 		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + resp);
 
 		if (resp.getStatus() == 200) {
 			String output = resp.getEntity(String.class);
-			System.out.println("output:::::" + output);
-			
+			System.out.println("inside if" + output);
+
 			try{
 				System.out.println("Inside try::");
-				JSONObject jObject = new JSONObject(output);
 				companies=	new ObjectMapper().readValue(output, CompaniesGroup.class);
 				System.out.println("companies::::"+companies);
 				return companies;
+
 			}catch (Exception e) {
 				System.out.println("Exception" + e);
+				e.printStackTrace();
 			}	
 
 
 		}
 		return companies;
-		
 	}
 
 
@@ -179,6 +175,7 @@ public class CompanyServlet extends HttpServlet {
 
 		System.out.println("searchCompanies::");
 		Client client = Client.create();
+		Output output =  new Output();
 		WebResource webResource = client.resource("https://api.linkedin.com/v1/company-search?format=json&sort=relevance&oauth2_access_token=" + accessToken);
 		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + resp);
@@ -186,25 +183,25 @@ public class CompanyServlet extends HttpServlet {
 		if (resp.getStatus() == 200) {
 			String result = resp.getEntity(String.class);
 			System.out.println("result::::" + result);
-			
+
 			try{
-								
 				JSONObject jObject = new JSONObject(result);
 				output=	new ObjectMapper().readValue(result, Output.class);
 				System.out.println("output::::"+output);
 				return output;
+
 			}catch (Exception e) {
 				System.out.println("Exception" + e);
-				e.printStackTrace();
 			}	
 			
 	     }
+		
 		return output;
-		}
+	}
 		
 		public GetFollowedCompany getFollwedCompanies(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
 			
-			System.out.println("getFollwedCompanies::");
+			System.out.println("getFollwedCompanies:::::");
 			Client client = Client.create();
 			GetFollowedCompany company = new GetFollowedCompany();
 			WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/following/companies?format=json&oauth2_access_token=" + accessToken);
@@ -222,7 +219,7 @@ public class CompanyServlet extends HttpServlet {
 
 					company=	new ObjectMapper().readValue(output, GetFollowedCompany.class);
 					System.out.println("getFollweCompanies::"+company);
-
+					
 				}catch (Exception e) {
 					System.out.println("Exception" + e);
 				}	
@@ -256,10 +253,22 @@ public class CompanyServlet extends HttpServlet {
 				try{
 					System.out.println("Inside  getCompanyUpdates  try::");
 					JSONObject jObject = new JSONObject(output);
-					
-			    	companies=	new ObjectMapper().readValue(output, CompaniesGroup.class);
-			    	System.out.println("getCompanyUpdates::::"+companies);
-			    	return companies;
+					/*String values = jObject.getString("values");
+					System.out.println("valuesssss::::::"+values);
+					JSONObject innerValues = new JSONObject(values);
+					//System.out.println("innerValues::"+innerValues.getJSONArray("likes").getString(0));
+					//System.out.println("innerValues::"+innerValues.getJSONObject("likes").getString("values"));
+					String invalues = innerValues.getString("likes");
+				   //JSONObject invalues = innerValues.getJSONObject("likes");
+					System.out.println("innerValues::"+invalues);
+
+					List<Person> persons = new ObjectMapper().readValue(jObject.getString("values") , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
+					System.out.println("persons"+persons.toString());*/
+
+
+				companies=	new ObjectMapper().readValue(output, CompaniesGroup.class);
+				System.out.println("getCompanyUpdates::::"+companies);
+				return companies;
 
 			}catch (Exception e) {
 				System.out.println("Exception" + e);
@@ -286,7 +295,6 @@ public class CompanyServlet extends HttpServlet {
 
 			try{
 				System.out.println("Inside getStartFollowingCompanies try::");
-				JSONObject jObject = new JSONObject(output);
 				companies=	new ObjectMapper().readValue(output, CompaniesGroup.class);
 				System.out.println("getStartFollowingCompanies::::"+companies);
 				return companies;
