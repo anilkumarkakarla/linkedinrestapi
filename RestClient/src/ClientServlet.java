@@ -24,7 +24,7 @@ public class ClientServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+         System.out.println("Inside doGet of ClientServlet");
 		String authUrl = null;
 		try{
 			authUrl = "https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=77ywtoz3eay8jk&scope=rw_groups%20w_messages%20r_basicprofile%20r_contactinfo%20r_network"
@@ -50,14 +50,12 @@ public class ClientServlet extends HttpServlet {
 
 
 
-	public Person getMyProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public Person getMyProfile(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
 		System.out.println("getMyProfile::");
 		Person personInfo = new Person();
 		Client client = Client.create();
-		String auth = request.getParameter("auth");
 
-
-		WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~?format=json&oauth2_access_token=" + auth);
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~?format=json&oauth2_access_token=" + accessToken);
 		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + resp);
 		if (resp.getStatus() == 200) {
@@ -80,15 +78,14 @@ public class ClientServlet extends HttpServlet {
 
 	}	
 
-	public void getMyProfileById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public void getMyProfileById(HttpServletRequest request, HttpServletResponse response,String accessToken) throws ServletException, IOException{
 
 		System.out.println("getMyProfileById::");
 		Person personInfo = new Person();
 		Client client = Client.create();
-		String auth = request.getParameter("auth");
-		Person person =getMyProfile(request, response);
+		Person person =getMyProfile(request, response, accessToken);
 		System.out.println("personInfo.Id::"+person.getId());
-		WebResource getMyProfileWebResource = client.resource("https://api.linkedin.com/v1/people/id="+person.getId()+"?format=json&oauth2_access_token=" + auth);
+		WebResource getMyProfileWebResource = client.resource("https://api.linkedin.com/v1/people/id="+person.getId()+"?format=json&oauth2_access_token=" + accessToken);
 		ClientResponse Profile = getMyProfileWebResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp1:::::" + Profile);
 		if (Profile.getStatus() == 200) {
@@ -107,12 +104,11 @@ public class ClientServlet extends HttpServlet {
 
 	}
 
-	public Connection getMyConnection(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public Connection getMyConnection(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
 		System.out.println("getMyConnections::");
 		Connection connection = new Connection();
 		Client client = Client.create();
-		String auth = request.getParameter("auth");
-		WebResource getMyconnectionsWebResource = client.resource("https://api.linkedin.com/v1/people/~/connections?format=json&modified=new&oauth2_access_token=" + auth);
+		WebResource getMyconnectionsWebResource = client.resource("https://api.linkedin.com/v1/people/~/connections?format=json&modified=new&oauth2_access_token=" + accessToken);
 		ClientResponse Connections = getMyconnectionsWebResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp1:::::" + Connections);
 		if (Connections.getStatus() == 200) {
@@ -127,20 +123,19 @@ public class ClientServlet extends HttpServlet {
 				System.out.println("connections::::"+connection);
 				return connection;
 			}catch (Exception e) {
-				System.out.println("Exception" + e);
+				e.printStackTrace();
 			}
 		} 
 		return connection;
 	}
 
-	public void getOutOfNetworkProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public void getOutOfNetworkProfile(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
 		System.out.println("getOutOfNetworkProfile::");
 		Client client = Client.create();
 		Person personInfo = new Person();
-		String auth = request.getParameter("auth");
-		Person person =getMyProfile(request, response);
+		Person person =getMyProfile(request, response, accessToken);
 		System.out.println("personInfo.Id::"+person.getId());
-		WebResource getMyconnectionsWebResource = client.resource("https://api.linkedin.com/v1/people/id="+person.getId()+"?format=json&modified=new&oauth2_access_token=" + auth);
+		WebResource getMyconnectionsWebResource = client.resource("https://api.linkedin.com/v1/people/id="+person.getId()+"?format=json&modified=new&oauth2_access_token=" + accessToken);
 		ClientResponse Connections = getMyconnectionsWebResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp1:::::" + Connections);
 		if (Connections.getStatus() == 200) {
@@ -151,7 +146,7 @@ public class ClientServlet extends HttpServlet {
 				personInfo = new ObjectMapper().readValue(output, Person.class);
 				System.out.println("personInfo in getOutOfNetworkProfile::"+personInfo);
 			}catch (Exception e) {
-				System.out.println("Exception" + e);
+				e.printStackTrace();
 			}
 		} 
 	}
@@ -159,11 +154,10 @@ public class ClientServlet extends HttpServlet {
 
 
 
-	public void PeopleSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public void PeopleSearch(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
 		System.out.println("PeopleSearch::");
 		Client client = Client.create();
-		String auth = request.getParameter("auth");
-		WebResource getPeopleSearch = client.resource("https://api.linkedin.com/v1/people-search?format=json&sort=connections&oauth2_access_token=" + auth);
+		WebResource getPeopleSearch = client.resource("https://api.linkedin.com/v1/people-search?format=json&sort=connections&oauth2_access_token=" + accessToken);
 		ClientResponse PeopleSearch = getPeopleSearch.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + PeopleSearch);
 		if (PeopleSearch.getStatus() == 200) {
@@ -180,22 +174,22 @@ public class ClientServlet extends HttpServlet {
 				List<Person> persons = new ObjectMapper().readValue(jObjectPeople.getString("values") , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
 				System.out.println("persons" + persons);
 			}catch (Exception e) {
-				System.out.println("Exception" + e);
+				e.printStackTrace();
 			}
 		} 
 
 
 	}
 
-	public void getMyMemberConnectionsById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public void getMyMemberConnectionsById(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
 
 		System.out.println("getMyMemberConnectionsById::");
-		Person personInfo = new Person();
+		//Person personInfo = new Person();
 		Client client = Client.create();
-		String auth = request.getParameter("auth");
-		Person person =getMyProfile(request, response);
+		//String auth = request.getParameter("auth");
+		Person person =getMyProfile(request, response, accessToken);
 		System.out.println("personInfo.Id::"+person.getId());
-		WebResource getMyMemberConnectionsWebResource = client.resource("https://api.linkedin.com/v1/people/id="+person.getId()+"/connections?format=json&modified=new&oauth2_access_token=" + auth);
+		WebResource getMyMemberConnectionsWebResource = client.resource("https://api.linkedin.com/v1/people/id="+person.getId()+"/connections?format=json&modified=new&oauth2_access_token=" + accessToken);
 		ClientResponse Profile =getMyMemberConnectionsWebResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp1:::::" +Profile);
 		if (Profile.getStatus() == 200) {
@@ -207,7 +201,7 @@ public class ClientServlet extends HttpServlet {
 				List<Person> persons = new ObjectMapper().readValue(jObject.getString("values") , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
 				System.out.println(" inside getMyMemberConnectionsById personInfo::"+ persons);
 			}catch (Exception e) {
-				System.out.println("Exception" + e);
+				e.printStackTrace();
 			}
 
 		}
@@ -218,4 +212,7 @@ public class ClientServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
+
+
+	
 }
