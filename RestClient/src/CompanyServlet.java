@@ -31,7 +31,7 @@ import com.sun.jersey.api.client.WebResource;
 
 public class CompanyServlet {
 
-	public CompanyServlet getCompanyById(String accessToken) throws ServletException, IOException{
+	public CompanyServlet getCompanyById(String accessToken) {
 		System.out.println("getCompanyById::");
 		CompanyServlet company = new CompanyServlet(); 
 		Client client = Client.create();
@@ -57,7 +57,7 @@ public class CompanyServlet {
 	}	
 
 
-	public CompanyServlet getCompanyByUniversalName(String accessToken) throws ServletException, IOException{
+	public CompanyServlet getCompanyByUniversalName(String accessToken) {
 
 		System.out.println("getCompanyByUniversalName::");
 		CompanyServlet company = new CompanyServlet();
@@ -82,7 +82,7 @@ public class CompanyServlet {
 		return company;
 	}
 
-	public CompaniesGroup getCompanyByEmailDomain(String accessToken) throws ServletException, IOException{
+	public CompaniesGroup getCompanyByEmailDomain(String accessToken) {
 
 
 
@@ -118,7 +118,7 @@ public class CompanyServlet {
 
 
 
-	public CompaniesGroup getCompanyByIdAndUniversalName(String accessToken) throws ServletException, IOException{
+	public CompaniesGroup getCompanyByIdAndUniversalName(String accessToken) {
 
 		System.out.println("getCompanyByIdAndUniversalName::");
 		Client client = Client.create();
@@ -148,7 +148,7 @@ public class CompanyServlet {
 	}
 
 
-	public Output searchCompanies(String accessToken) throws ServletException, IOException{
+	public Output searchCompanies(String accessToken) {
 
 		System.out.println("searchCompanies::");
 		Client client = Client.create();
@@ -176,7 +176,7 @@ public class CompanyServlet {
 		return output;
 	}
 
-	public GetFollowedCompany getFollwedCompanies(String accessToken) throws ServletException, IOException{
+	public GetFollowedCompany getFollwedCompanies(String accessToken) {
 
 		System.out.println("getFollwedCompanies:::::");
 		Client client = Client.create();
@@ -211,7 +211,7 @@ public class CompanyServlet {
 		
 	}
 	
-	public CompaniesGroup getCompanyUpdates(String accessToken) throws ServletException, IOException{
+	public CompaniesGroup getCompanyUpdates(String accessToken) {
 			
 			
 			
@@ -236,7 +236,6 @@ public class CompanyServlet {
 
 			}catch (Exception e) {
 				System.out.println("Exception" + e);
-				e.printStackTrace();
 
 			}	
 
@@ -244,7 +243,7 @@ public class CompanyServlet {
 		return companies;	
 	} 
 
-	public CompaniesGroup getStartFollowingCompanies(String accessToken) throws ServletException, IOException{
+	public CompaniesGroup getStartFollowingCompanies(String accessToken) {
 
 		System.out.println(" getStartFollowingCompanies::");
 		Client client = Client.create();
@@ -259,7 +258,6 @@ public class CompanyServlet {
 
 			try{
 				System.out.println("Inside getStartFollowingCompanies try::");
-				JSONObject jObject = new JSONObject(output);
 				companies=	new ObjectMapper().readValue(output, CompaniesGroup.class);
 				System.out.println("getStartFollowingCompanies::::"+companies);
 				return companies;

@@ -11,7 +11,7 @@ import com.sun.jersey.api.client.WebResource;
 
 
 public class JobServlet  {
-	public JobBookmark getJobBookmark(String accessToken) throws ServletException, IOException{
+	public JobBookmark getJobBookmark(String accessToken) {
 		System.out.println("JobBookmark::");
 		JobBookmark jobBookmark = new JobBookmark();
 		Client client = Client.create();
@@ -40,7 +40,7 @@ public class JobServlet  {
 
 
 
-	public Jobs getJob(String accessToken) throws ServletException, IOException{
+	public Jobs getJob(String accessToken) {
 		System.out.println("getJob::");
 		Jobs jobs = new Jobs();
 		Client client = Client.create();
