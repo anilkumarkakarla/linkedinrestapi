@@ -31,7 +31,7 @@ public class LinkedinResponse extends HttpServlet {
 		accessToken = "https://www.linkedin.com/uas/oauth2/accessToken?grant_type=authorization_code"
 				+ "&code="+code+"&redirect_uri=http://localhost:8080/RestClient/callback&client_id=77ywtoz3eay8jk&client_secret=qvP3Jh0mHBkUs80i";
 
-		HttpClient httpclient = new HttpClient();
+		HttpClient httpclient = new HttpClient(); 
 		PostMethod post = new PostMethod(accessToken);
 
 		try {
@@ -67,6 +67,8 @@ public class LinkedinResponse extends HttpServlet {
 		clientServlet.getMyMemberConnectionsById(accessToken);
 		clientServlet.getOutOfNetworkProfile(accessToken);
 
+		
+		
 		CompanyServlet companyServlet = new CompanyServlet();
 		companyServlet.getCompanyById(accessToken);
 		companyServlet.getCompanyByUniversalName(accessToken);
@@ -105,6 +107,12 @@ public class LinkedinResponse extends HttpServlet {
 		networkUpdates.getNetworkStatistics(accessToken);
 		networkUpdates.PostNetworkUpdates(accessToken);
 		networkUpdates.PostNetworkUpdates(accessToken);
+		
+		
+		Communications communications = new Communications();
+		communications.InvitedByEmail(accessToken);
+		communications.InvitedByMemberId(accessToken);
+		communications.SendMessage(accessToken);
 		
 		
 		
