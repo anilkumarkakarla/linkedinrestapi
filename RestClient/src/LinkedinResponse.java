@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.http.HttpResponse;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -20,6 +21,9 @@ import org.json.JSONTokener;
 //import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.google.gson.Gson;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 
 
 @WebServlet("/LinkedinResponse")
@@ -71,14 +75,49 @@ public class LinkedinResponse extends HttpServlet {
 		
 		//req.getSession().setAttribute(ACCESS_TOKEN, accessToken);
 		//resp.sendRedirect(accessToken);
+		accessToken= "AQW4lEJY0OD6m4o_NsPXJ-tT-jotVMBLQpizAQUkwZDCxyU-U6RSkGd-RgNQyYVbeADXxVri00HrjfuLokOjnsJP4TncigalKZg2BF-_XOl_TFO-V9LdLwyjiZPeVK6FIsE2oBwtw6RzkCVhem7U5H05Xzdv-icreTmlDIVVXvQGzgF0QRI";
+		
+		//JobServlet jobServlet = new JobServlet();
+        //jobServlet.getJobBookmark(req, resp, accessToken);
+		//jobServlet.getMemberSuggestedJobs(req, resp, accessToken);
+		
+		CompanyServlet companyServlet = new CompanyServlet();
+		companyServlet.getCompanyUpdates(accessToken);
+		//companyServlet. getStartFollowingCompanies(req, resp, accessToken);
+		
+		//GroupServlet groupServlet = new GroupServlet();
+		//groupServlet.getDeletedUserSuggestedGroups(req, resp, accessToken);
+	
+		//NetworkUpdates networkUpdates = new NetworkUpdates();
+		//networkUpdates.getNetworkUpdates(accessToken);
+		//networkUpdates.getMemberNetworkUpdates(req, resp, accessToken);
+		//networkUpdates.getNetworkStatistics(req, resp, accessToken);
+		try {
+			//networkUpdates.PostNetworkUpdates(accessToken);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	
+		//ClientServlet clientServlet = new ClientServlet();
+		//clientServlet.getMyMemberConnectionsById(req, resp, accessToken);
+		
+		//Communications communications  = new Communications();
+		try {
+			//communications.InvitedByEmail(accessToken);
+			//communications.InvitedByMemberId(accessToken);
+		    //communications.SendMessage(accessToken);
 
-	}
-
-
-
+        
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	
 }
 
 
-
-
-
+	}

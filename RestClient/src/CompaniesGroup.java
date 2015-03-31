@@ -23,6 +23,35 @@ public class CompaniesGroup {
 	@JsonProperty(value = "values")
 	private List<CompanyValues> companyValues;
 	
+	@JsonProperty(value = "updateComments")
+	private CompanyUpdatesComments companyUpdateComments;
+	
+	
+
+	public List<CompanyValues> getCompanyValues() {
+		return companyValues;
+	}
+
+	public void setCompanyValues(List<CompanyValues> companyValues) {
+		this.companyValues = companyValues;
+	}
+
+	public CompanyUpdatesComments getCompanyUpdateComments() {
+		return companyUpdateComments;
+	}
+
+	public void setCompanyUpdateComments(
+			CompanyUpdatesComments companyUpdateComments) {
+		this.companyUpdateComments = companyUpdateComments;
+	}
+
+	public List<Company> getCompanies() {
+		return companies;
+	}
+
+	public void setCompanies(List<Company> companies) {
+		this.companies = companies;
+	}
 
 	public List<CompanyValues> getCompanyUpdatesComments() {
 		return companyValues;
@@ -63,8 +92,9 @@ public class CompaniesGroup {
 	@Override
 	public String toString() {
 		return "CompaniesGroup [count=" + count + ", start=" + start
-				+ ", total=" + total + ", companyValues="
-				+ companyValues + ", companies=" + companies + "]";
+				+ ", total=" + total + ", companyValues=" + companyValues
+				+ ", companyUpdateComments=" + companyUpdateComments
+				+ ", companies=" + companies + "]";
 	}
 
 	

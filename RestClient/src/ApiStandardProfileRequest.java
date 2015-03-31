@@ -1,11 +1,19 @@
-import org.codehaus.jackson.annotate.JsonProperty;
+import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class ApiStandardProfileRequest {
 	
 	@JsonProperty(value = "headers")
 	private Header headers;
 	
+	@JsonProperty(value = "_total")
+	private int total;
 	
+	@JsonProperty(value = "values")
+	private List<ApiValues> apiValues;
+
 	
 	@JsonProperty(value = "url")
 	private String url;

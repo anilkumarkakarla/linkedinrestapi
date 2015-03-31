@@ -16,6 +16,20 @@ public class CompanyCommentValues {
 	@JsonProperty(value = "likes")
 	private List<CompanyLikes> companyLikes;
 	
+	@JsonProperty(value = "person")
+	private List<Person> person;
+	
+	
+
+	public List<Person> getPerson() {
+		return person;
+	}
+
+
+	public void setPerson(List<Person> person) {
+		this.person = person;
+	}
+
 
 	public List<CompanyLikes> getCompanyLikes() {
 		return companyLikes;
@@ -68,8 +82,8 @@ public class CompanyCommentValues {
 	@Override
 	public String toString() {
 		return "CompanyCommentValues [comment=" + comment + ", id=" + id
-				+ ", companyLikes=" + companyLikes + ", sequenceNumber="
-				+ sequenceNumber  + "]";
+				+ ", companyLikes=" + companyLikes + ", person=" + person
+				+ ", sequenceNumber=" + sequenceNumber + "]";
 	}
 
 

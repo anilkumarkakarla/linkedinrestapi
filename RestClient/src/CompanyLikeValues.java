@@ -9,13 +9,13 @@ public class  CompanyLikeValues {
 
 	
 	@JsonProperty(value = "person")
-	private List<Person> persons;
+	private Person persons;
 
 	
 		
 	
 
-	public List<Person> getPersons() {
+	public Person getPersons() {
 		return persons;
 	}
 
@@ -23,7 +23,7 @@ public class  CompanyLikeValues {
 
 
 
-	public void setPersons(List<Person> persons) {
+	public void setPersons(Person persons) {
 		this.persons = persons;
 	}
 

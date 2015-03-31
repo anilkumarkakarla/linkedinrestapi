@@ -1,6 +1,7 @@
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class CompanyValues {
 	
 	
@@ -16,15 +17,50 @@ public class CompanyValues {
 
 
 	@JsonProperty(value = "numLikes")
-	private boolean numLikes;
+	private int numLikes;
 	
 	@JsonProperty(value = "timestamp")
-	private boolean timestamp;
+	private long timestamp;
 
 
 	@JsonProperty(value = "likes")
 	private CompanyLikes companyLikes;
 	
+	@JsonProperty(value = "locationDescription")	
+	private String locationDescription;
+	
+	
+	
+	public int getNumLikes() {
+		return numLikes;
+	}
+
+
+	public void setNumLikes(int numLikes) {
+		this.numLikes = numLikes;
+	}
+
+
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
+
+
+	public String getLocationDescription() {
+		return locationDescription;
+	}
+
+
+	public void setLocationDescription(String locationDescription) {
+		this.locationDescription = locationDescription;
+	}
+
+
 	public CompanyLikes getCompanyLikes() {
 		return companyLikes;
 	}
@@ -35,24 +71,9 @@ public class CompanyValues {
 	}
 
 
-	public boolean isNumLikes() {
-		return numLikes;
-	}
 
 
-	public void setNumLikes(boolean numLikes) {
-		this.numLikes = numLikes;
-	}
-
-
-	public boolean isTimestamp() {
-		return timestamp;
-	}
-
-
-	public void setTimestamp(boolean timestamp) {
-		this.timestamp = timestamp;
-	}
+	
 
 
 	public boolean isCommentable() {
@@ -90,7 +111,7 @@ public class CompanyValues {
 		return "CompanyValues [isCommentable=" + isCommentable + ", isLikable="
 				+ isLikable + ", isLiked=" + isLiked + ", numLikes=" + numLikes
 				+ ", timestamp=" + timestamp + ", companyLikes=" + companyLikes
-				+ "]";
+				+ ", locationDescription=" + locationDescription + "]";
 	}
 	
 }

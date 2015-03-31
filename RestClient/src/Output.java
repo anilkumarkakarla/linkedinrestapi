@@ -18,7 +18,18 @@ public class Output {
 	@JsonProperty(value = "numResults")
 	private int  numResults;
 	
+	@JsonProperty(value = "jobs")
+	private List<SuggestedCompany>suggestedCompany;
+
 	
+
+	public List<SuggestedCompany> getSuggestedCompany() {
+		return suggestedCompany;
+	}
+
+	public void setSuggestedCompany(List<SuggestedCompany> suggestedCompany) {
+		this.suggestedCompany = suggestedCompany;
+	}
 
 	public int getNumResults() {
 		return numResults;
@@ -49,7 +60,8 @@ public class Output {
 	@Override
 	public String toString() {
 		return "Output [companies=" + companies + ", facets=" + facets
-				+ ", numResults=" + numResults + "]";
+				+ ", numResults=" + numResults + ", suggestedCompany="
+				+ suggestedCompany + "]";
 	}
 
 	

@@ -65,6 +65,20 @@ public class Jobs {
 	public Company getCompany() {
 		return company;
 	}
+	
+	@JsonProperty(value = "jobPoster")
+	private JobPoster jobposter;
+
+
+
+
+	public JobPoster getJobposter() {
+		return jobposter;
+	}
+
+	public void setJobposter(JobPoster jobposter) {
+		this.jobposter = jobposter;
+	}
 
 	public void setCompany(Company company) {
 		this.company = company;
@@ -87,7 +101,7 @@ public class Jobs {
 		return "Jobs [active=" + active + ", description=" + description
 				+ ", id=" + id + ", postingTimestamp=" + postingTimestamp
 				+ ", company=" + company + ", jobsPosition=" + jobsPosition
-				+ "]";
+				+ ", jobposter=" + jobposter + "]";
 	}
 
 	
