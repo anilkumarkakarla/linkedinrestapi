@@ -10,7 +10,7 @@ import com.sun.jersey.api.client.WebResource;
 public class SocialStream {
 
 
-	public CurrentShare getCurrentShare(String accessToken) throws ServletException, IOException{
+	public CurrentShare getCurrentShare(String accessToken){
 		System.out.println("getCurrentShare::");
 		CurrentShare currentShare = new CurrentShare();
 		Client client = Client.create();
@@ -36,7 +36,7 @@ public class SocialStream {
 
 
 
-	public ShareStream getMyShareStream(String accessToken) throws ServletException, IOException{
+	public ShareStream getMyShareStream(String accessToken) {
 		System.out.println("getMyShareStream::");
 		ShareStream shareStream = new ShareStream();
 		Client client = Client.create();
@@ -61,7 +61,7 @@ public class SocialStream {
 	}
 
 
-	public ShareStream getMemberStreamsById(String accessToken) throws ServletException, IOException{
+	public ShareStream getMemberStreamsById(String accessToken){
 		System.out.println("getMemberStreamsById:");
 		ShareStream shareStream = new ShareStream();
 		Client client = Client.create();
@@ -87,7 +87,7 @@ public class SocialStream {
 	}
 
 
-	public void addShare(String accessToken) throws Exception{ 
+	public void addShare(String accessToken) { 
 		System.out.println("addShare:::::::");
 		StringBuilder requestBody = new StringBuilder();
 		requestBody.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -109,7 +109,7 @@ public class SocialStream {
 
 	}
 
-	public void reShare(String accessToken) throws Exception{ 
+	public void reShare(String accessToken) { 
 		System.out.println("reShare:::::::");
 		StringBuilder requestBody = new StringBuilder();
 		requestBody.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -130,7 +130,7 @@ public class SocialStream {
 		System.out.println("result:::::::" + resp);
 	}
 
-	public void postComments(String accessToken) throws Exception{ 
+	public void postComments(String accessToken){ 
 		System.out.println("postComments:::::::");
 		StringBuilder requestBody = new StringBuilder();
 		requestBody.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -143,7 +143,7 @@ public class SocialStream {
 		System.out.println("result:::::::" + resp);
 	}
 
-	public void likeComment(String accessToken) throws Exception{ 
+	public void likeComment(String accessToken) { 
 		System.out.println("likeComment:::::::");
 		StringBuilder requestBody = new StringBuilder();
 		requestBody.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -154,7 +154,7 @@ public class SocialStream {
 		System.out.println("result:::::::" + resp);
 	}
 
-	public void dislikeComment(String accessToken) throws Exception{ 
+	public void dislikeComment(String accessToken){ 
 		System.out.println("dislikeComment:::::::");
 		StringBuilder requestBody = new StringBuilder();
 		requestBody.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");

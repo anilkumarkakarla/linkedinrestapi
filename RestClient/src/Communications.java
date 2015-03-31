@@ -1,38 +1,12 @@
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.codehaus.jackson.map.ObjectMapper;
-
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 
-@WebServlet("/CommunicationsServlet")
-public class Communications extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	public Communications() {
-		super();
-	}
-
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	}
-
+public class Communications  {
 	
-	
-	
-	
-	
-	
-	public  void InvitedByEmail (String accessToken) throws Exception {
+	public  void InvitedByEmail (String accessToken){
 		
 		  StringBuilder requestBody = new StringBuilder();
 		  requestBody.append("<?xml version='1.0' encoding='UTF-8'?>");
@@ -58,9 +32,9 @@ public class Communications extends HttpServlet {
 		  ClientResponse resp = webResource.type("application/xml").post(ClientResponse.class, requestBody.toString());
 		  System.out.println("result:::::::" + resp);
 		 }
-}
 
-/*	public  void InvitedByMemberId (String accessToken) throws Exception {
+
+	public  void InvitedByMemberId (String accessToken){
 		
 		
 		System.out.println("InvitedByMemberId:::::::");
@@ -91,7 +65,7 @@ public class Communications extends HttpServlet {
 		 }
 		
 
-	public  void SendMessage (String accessToken) throws Exception {
+	public  void SendMessage (String accessToken){
 		System.out.println("SendMessage:::::::");
 		  StringBuilder requestBody = new StringBuilder();
 		  requestBody.append("<?xml version='1.0' encoding='UTF-8'?>");
@@ -112,4 +86,4 @@ public class Communications extends HttpServlet {
 		  ClientResponse resp = webResource.type("application/xml").post(ClientResponse.class, requestBody.toString());
 		  System.out.println("result:::::::" + resp);
 		 }
-}*/
+}

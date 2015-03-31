@@ -1,7 +1,3 @@
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.sun.jersey.api.client.Client;
@@ -65,7 +61,7 @@ public class JobServlet  {
 		return jobs;
 	}	
 
-	public Output searchJobs(String accessToken) throws ServletException, IOException{
+	public Output searchJobs(String accessToken) {
 		System.out.println("searchJobs::");
 		Output output = new Output();
 		Client client = Client.create();
@@ -91,7 +87,7 @@ public class JobServlet  {
 
 
 
-	public void addJobBookMark(String accessToken) throws Exception{ 
+	public void addJobBookMark(String accessToken) { 
 		System.out.println("addJobBookMark:::::::");
 		StringBuilder requestBody = new StringBuilder();
 		requestBody.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
@@ -107,7 +103,7 @@ public class JobServlet  {
 	}
 
 
-	public void removeJobBookMark(String accessToken) throws Exception{ 
+	public void removeJobBookMark(String accessToken){ 
 		System.out.println("removeJobBookMark:::::::");
 		StringBuilder requestBody = new StringBuilder();
 		Client client = Client.create();

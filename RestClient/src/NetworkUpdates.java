@@ -1,9 +1,6 @@
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -15,7 +12,7 @@ import com.sun.jersey.api.client.WebResource;
 public class NetworkUpdates {
 	
 
-	public CompaniesGroup getNetworkUpdates( String accessToken ) throws ServletException, IOException{
+	public CompaniesGroup getNetworkUpdates( String accessToken ){
 		System.out.println("NetworkUpdates::");
 		System.out.println("accessToken:::"+accessToken);
 		CompaniesGroup companiesGroup = new CompaniesGroup();
@@ -41,7 +38,7 @@ public class NetworkUpdates {
 		return companiesGroup;
 	}
 
-	public CompaniesGroup getMemberNetworkUpdates( String accessToken ) throws ServletException, IOException{
+	public CompaniesGroup getMemberNetworkUpdates( String accessToken ){
 		System.out.println("MemberNetworkUpdates::");
 		System.out.println("accessToken:::"+accessToken);
 		CompaniesGroup companiesGroup = new CompaniesGroup();
@@ -95,7 +92,7 @@ public class NetworkUpdates {
 
 
 
-public  void PostNetworkUpdates (String accessToken) throws Exception {
+public  void PostNetworkUpdates (String accessToken) {
 	System.out.println("PostNetworkUpdates:::::::");
 	  StringBuilder requestBody = new StringBuilder();
 	  requestBody.append("<?xml version='1.0' encoding='UTF-8'?>");

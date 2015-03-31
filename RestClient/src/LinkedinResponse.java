@@ -81,6 +81,34 @@ public class LinkedinResponse extends HttpServlet {
 		JobServlet jobServlet = new JobServlet();
 		jobServlet.getJob(accessToken);
 		jobServlet.getJobBookmark(accessToken);
+		jobServlet.addJobBookMark(accessToken);
+		jobServlet.removeJobBookMark(accessToken);
+		jobServlet.searchJobs(accessToken);
+		
+		
+		SocialStream socialStream = new SocialStream();
+		socialStream.getCurrentShare(accessToken);
+		socialStream.getMyShareStream(accessToken);
+		socialStream.getMemberStreamsById(accessToken);
+		socialStream.addShare(accessToken);
+		socialStream.reShare(accessToken);
+		socialStream.postComments(accessToken);
+		socialStream.likeComment(accessToken);
+		socialStream.dislikeComment(accessToken);
+		socialStream.getComments(accessToken);
+		socialStream.getLikes(accessToken);
+		
+		
+		NetworkUpdates networkUpdates = new NetworkUpdates();
+		networkUpdates.getNetworkUpdates(accessToken);
+		networkUpdates.getMemberNetworkUpdates(accessToken);
+		networkUpdates.getNetworkStatistics(accessToken);
+		networkUpdates.PostNetworkUpdates(accessToken);
+		networkUpdates.PostNetworkUpdates(accessToken);
+		
+		
+		
+		
 
 		GroupsClientAPI groupsClientAPI = new GroupsClientAPI();
 		groupsClientAPI.getGroup(accessToken);
