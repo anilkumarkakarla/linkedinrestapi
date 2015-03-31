@@ -2,6 +2,10 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jettison.json.JSONObject;
@@ -11,7 +15,21 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 
-public class ClientServlet {
+@WebServlet("/ClientServlet")
+public class ClientServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Inside doGet of ClientServlet");
+		String authUrl = null;
+		try{
+			authUrl = "https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=77ywtoz3eay8jk&scope=rw_groups%20w_messages%20r_basicprofile%20r_contactinfo%20r_network"
+					+ "&state=qvP3Jh0mHBkUs80i&redirect_uri=http://localhost:8080/RestClient/callback";
+		}catch (Exception e) {
+			e.printStackTrace();  
+		}
+		response.sendRedirect(authUrl);
+	}
+
 	public Person getMyProfile(String accessToken) throws ServletException, IOException{
 		System.out.println("getMyProfile::");
 		Person personInfo = new Person();
