@@ -271,6 +271,52 @@ public class CompanyServlet {
 
 		}
 		return companies;
+	}
 
-	}	
+	public void StartFollowingCompanies(String accessToken) throws Exception{ 
+		System.out.println("StartFollowingCompanies:::::::");
+		StringBuilder requestBody = new StringBuilder();
+		requestBody.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
+		requestBody.append("<company><id>1337</id></company>");
+		Client client = Client.create();
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/following/companies?oauth2_access_token=" + accessToken);
+		ClientResponse resp = webResource.type("application/xml").post(ClientResponse.class, requestBody.toString());
+		System.out.println("result:::::::" + resp);
+
+	}
+
+	public void StopFollowingCompanies(String accessToken) throws Exception{ 
+		System.out.println("StopFollowingCompanies:::::::");
+		StringBuilder requestBody = new StringBuilder();
+		Client client = Client.create();
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/following/companies/id=1337?oauth2_access_token=" + accessToken);
+		ClientResponse resp = webResource.type("application/xml").delete(ClientResponse.class, requestBody.toString());
+		System.out.println("result:::::::" + resp);
+	}
+
+
+
+	public SuggestedCompanies getSuggestedCompanyToFollow(String accessToken) throws ServletException, IOException{
+		System.out.println("getSuggestedCompanyToFollow::");
+		SuggestedCompanies suggestedCompanies = new SuggestedCompanies();
+		Client client = Client.create();
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/suggestions/to-follow/companies?format=json&oauth2_access_token=" + accessToken);
+		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
+		System.out.println("resp:::::" + resp);
+		if (resp.getStatus() == 200) {
+			String output = resp.getEntity(String.class);
+			System.out.println("inside if" + output);
+			try{
+				System.out.println("Inside try::");
+				suggestedCompanies = new ObjectMapper().readValue(output, SuggestedCompanies.class);
+				System.out.println("company::::::"+suggestedCompanies);
+				return suggestedCompanies;
+
+			}catch (Exception e) {
+				System.out.println("Exception" + e);
+			} 
+
+		}
+		return suggestedCompanies;
+	}
 }

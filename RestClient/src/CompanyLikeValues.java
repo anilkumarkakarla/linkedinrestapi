@@ -1,5 +1,3 @@
-import java.util.List;
-
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
@@ -11,9 +9,17 @@ public class  CompanyLikeValues {
 	@JsonProperty(value = "person")
 	private Person persons;
 
-	
-		
-	
+	@JsonProperty(value = "timestamp")
+	private long timestamp;
+
+
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
 
 	public Person getPersons() {
 		return persons;
@@ -33,7 +39,8 @@ public class  CompanyLikeValues {
 
 	@Override
 	public String toString() {
-		return "CompanyLikeValues [persons=" + persons + "]";
+		return "CompanyLikeValues [persons=" + persons + ", timestamp="
+				+ timestamp + "]";
 	}
 
 

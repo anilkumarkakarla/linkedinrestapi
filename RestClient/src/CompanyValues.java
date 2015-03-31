@@ -23,13 +23,17 @@ public class CompanyValues {
 	private long timestamp;
 
 
+	@JsonProperty(value = "updateComments")
+	private CompanyUpdatesComments companyUpdatesComments;
+
 	@JsonProperty(value = "likes")
 	private CompanyLikes companyLikes;
 	
 	@JsonProperty(value = "locationDescription")	
 	private String locationDescription;
 	
-	
+	@JsonProperty(value = "updateContent")
+	private UpdateContent  updateContent;
 	
 	public int getNumLikes() {
 		return numLikes;
@@ -40,7 +44,26 @@ public class CompanyValues {
 		this.numLikes = numLikes;
 	}
 
+	public UpdateContent getUpdateContent() {
+		return updateContent;
+	}
 
+	public void setUpdateContent(UpdateContent updateContent) {
+		this.updateContent = updateContent;
+	}
+	
+	public CompanyUpdatesComments getCompanyUpdatesComments() {
+		return companyUpdatesComments;
+	}
+
+	public void setCompanyUpdatesComments(
+			CompanyUpdatesComments companyUpdatesComments) {
+		this.companyUpdatesComments = companyUpdatesComments;
+	}
+	
+	
+	
+	
 	public long getTimestamp() {
 		return timestamp;
 	}
@@ -71,9 +94,24 @@ public class CompanyValues {
 	}
 
 
+	public boolean isNumLikes() {
+		return numLikes;
+	}
 
 
-	
+	public void setNumLikes(boolean numLikes) {
+		this.numLikes = numLikes;
+	}
+
+
+	public long isTimestamp() {
+		return timestamp;
+	}
+
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
 
 
 	public boolean isCommentable() {
@@ -110,8 +148,9 @@ public class CompanyValues {
 	public String toString() {
 		return "CompanyValues [isCommentable=" + isCommentable + ", isLikable="
 				+ isLikable + ", isLiked=" + isLiked + ", numLikes=" + numLikes
-				+ ", timestamp=" + timestamp + ", companyLikes=" + companyLikes
-				+ ", locationDescription=" + locationDescription + "]";
+				+ ", timestamp=" + timestamp + ", companyUpdatesComments="
+				+ companyUpdatesComments + ", companyLikes=" + companyLikes
+				+ ", updateContent=" + updateContent + ", locationDescription=" + locationDescription + "]";
 	}
 	
 }

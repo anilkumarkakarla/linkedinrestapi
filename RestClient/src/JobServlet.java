@@ -1,10 +1,6 @@
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -13,21 +9,9 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 
-@WebServlet("/JobServlet")
-public class JobServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	public JobServlet() {
-		super();
-	}
-
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	}
-	
-	
-	public JobBookmark getJobBookmark(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
+public class JobServlet  {
+	public JobBookmark getJobBookmark(String accessToken) throws ServletException, IOException{
 		System.out.println("JobBookmark::");
 		JobBookmark jobBookmark = new JobBookmark();
 		Client client = Client.create();
@@ -56,7 +40,7 @@ public class JobServlet extends HttpServlet {
 
 
 
-	public Jobs getJob(HttpServletRequest request, HttpServletResponse response, String accessToken) throws ServletException, IOException{
+	public Jobs getJob(String accessToken) throws ServletException, IOException{
 		System.out.println("getJob::");
 		Jobs jobs = new Jobs();
 		Client client = Client.create();
@@ -79,13 +63,56 @@ public class JobServlet extends HttpServlet {
 
 		}
 		return jobs;
+	}	
 
+	public Output searchJobs(String accessToken) throws ServletException, IOException{
+		System.out.println("searchJobs::");
+		Output output = new Output();
+		Client client = Client.create();
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/job-search?format=json&sort=R&oauth2_access_token=" + accessToken);
+		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
+		System.out.println("resp:::::" + resp);
+		if (resp.getStatus() == 200) {
+			String result = resp.getEntity(String.class);
+			System.out.println("result:::::::" + result);
+			try{
+				System.out.println("Inside try::");
+				output = new ObjectMapper().readValue(result, Output.class);
+				System.out.println("company::::::"+output);
+				return output;
+
+			}catch (Exception e) {
+				System.out.println("Exception" + e);
+				e.printStackTrace();
+			}
+		}
+		return output;
 	}	
 
 
 
+	public void addJobBookMark(String accessToken) throws Exception{ 
+		System.out.println("addJobBookMark:::::::");
+		StringBuilder requestBody = new StringBuilder();
+		requestBody.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
+		requestBody.append("<job-bookmark>");
+		requestBody.append("<job>");
+		requestBody.append("<id>2924431</id>");
+		requestBody.append("</job>");
+		requestBody.append("</job-bookmark>");
+		Client client = Client.create();
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/job-bookmarks?oauth2_access_token=" + accessToken);
+		ClientResponse resp = webResource.type("application/xml").post(ClientResponse.class, requestBody.toString());
+		System.out.println("result:::::::" + resp);
+	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+	public void removeJobBookMark(String accessToken) throws Exception{ 
+		System.out.println("removeJobBookMark:::::::");
+		StringBuilder requestBody = new StringBuilder();
+		Client client = Client.create();
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/job-bookmarks/2924431?oauth2_access_token=" + accessToken);
+		ClientResponse resp = webResource.type("application/xml").delete(ClientResponse.class, requestBody.toString());
+		System.out.println("result:::::::" + resp);
 	}
 }

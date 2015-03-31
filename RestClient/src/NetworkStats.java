@@ -1,17 +1,16 @@
-import java.util.List;
+import java.util.Arrays;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class Buckets {
-	
-	@JsonProperty(value = "_total")
+public class NetworkStats {
+
+	@JsonProperty(value = "_total")	
 	private int total;
-	
-	@JsonProperty(value = "values")
-	
-	private List<Values> values;
+
+	@JsonProperty(value = "values")	
+	private int[] values;
 
 	public int getTotal() {
 		return total;
@@ -21,19 +20,20 @@ public class Buckets {
 		this.total = total;
 	}
 
-	public List<Values> getValues() {
+	public int[] getValues() {
 		return values;
 	}
 
-	public void setValues(List<Values> values) {
+	public void setValues(int[] values) {
 		this.values = values;
 	}
 
 	@Override
 	public String toString() {
-		return "Buckets [total=" + total + ", values=" + values + "]";
+		return "NetworkStats [total=" + total + ", values="
+				+ Arrays.toString(values) + "]";
 	}
-	
-	
+
+
 
 }

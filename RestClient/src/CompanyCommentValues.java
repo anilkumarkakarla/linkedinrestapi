@@ -17,16 +17,13 @@ public class CompanyCommentValues {
 	private List<CompanyLikes> companyLikes;
 	
 	@JsonProperty(value = "person")
-	private List<Person> person;
-	
-	
+	private Person person;
 
-	public List<Person> getPerson() {
+	public Person getPerson() {
 		return person;
 	}
 
-
-	public void setPerson(List<Person> person) {
+	public void setPerson(Person person) {
 		this.person = person;
 	}
 

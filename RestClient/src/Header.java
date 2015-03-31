@@ -1,3 +1,5 @@
+import java.util.List;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
@@ -8,7 +10,7 @@ public class Header {
 	private int total;
 	
 	@JsonProperty(value = "values")
-	private HeaderValues headerValues;
+	private List<HeaderValues> headerValues;
 
 	public int getTotal() {
 		return total;
@@ -18,11 +20,11 @@ public class Header {
 		this.total = total;
 	}
 
-	public HeaderValues getHeaderValues() {
+	public List<HeaderValues> getHeaderValues() {
 		return headerValues;
 	}
 
-	public void setHeaderValues(HeaderValues headerValues) {
+	public void setHeaderValues(List<HeaderValues> headerValues) {
 		this.headerValues = headerValues;
 	}
 

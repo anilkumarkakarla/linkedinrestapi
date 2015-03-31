@@ -1,8 +1,7 @@
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonPropertyOrder;
 
-@JsonPropertyOrder({})
+
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Location {
 	

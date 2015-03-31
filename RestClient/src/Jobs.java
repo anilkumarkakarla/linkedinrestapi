@@ -1,12 +1,8 @@
 
-import java.util.List;
-
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonPropertyOrder;
 
 
-@JsonPropertyOrder({"id","firstName", "lastName", "url"})
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Jobs {
 	

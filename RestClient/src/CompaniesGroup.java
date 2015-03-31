@@ -3,10 +3,8 @@ import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonPropertyOrder;
 
 
-@JsonPropertyOrder({"id","firstName", "lastName", "url"})
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class CompaniesGroup {
 	@JsonProperty(value = "_count")
@@ -23,6 +21,10 @@ public class CompaniesGroup {
 	@JsonProperty(value = "values")
 	private List<CompanyValues> companyValues;
 	
+	
+	@JsonProperty(value = "updateContent")
+	private UpdateContent updateContent;
+
 	@JsonProperty(value = "updateComments")
 	private CompanyUpdatesComments companyUpdateComments;
 	
@@ -34,6 +36,14 @@ public class CompaniesGroup {
 
 	public void setCompanyValues(List<CompanyValues> companyValues) {
 		this.companyValues = companyValues;
+	}
+
+	public UpdateContent getUpdateContent() {
+		return updateContent;
+	}
+
+	public void setUpdateContent(UpdateContent updateContent) {
+		this.updateContent = updateContent;
 	}
 
 	public CompanyUpdatesComments getCompanyUpdateComments() {
@@ -94,7 +104,7 @@ public class CompaniesGroup {
 		return "CompaniesGroup [count=" + count + ", start=" + start
 				+ ", total=" + total + ", companyValues=" + companyValues
 				+ ", companyUpdateComments=" + companyUpdateComments
-				+ ", companies=" + companies + "]";
+				+ ", updateContent=" + updateContent + ", companies=" + companies + "]";
 	}
 
 	
