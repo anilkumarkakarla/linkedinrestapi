@@ -95,9 +95,6 @@ public class ClientServlet extends HttpServlet {
 			System.out.println("output::::" + output);
 			try{
 				System.out.println("Inside try::");
-				//JSONObject jObject = new JSONObject(output);
-				//connection = new ObjectMapper().readValue(output , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Person.class));
-				//connection = new ObjectMapper().readValue(output , new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Connection.class));
 				connection=	new ObjectMapper().readValue(output, Connection.class);
 				System.out.println("connections::::"+connection);
 				return connection;
@@ -162,9 +159,7 @@ public class ClientServlet extends HttpServlet {
 
 	public void getMyMemberConnectionsById(String accessToken) throws ServletException, IOException{
 		System.out.println("getMyMemberConnectionsById::");
-		//Person personInfo = new Person();
 		Client client = Client.create();
-		//String auth = request.getParameter("auth");
 		Person person =getMyProfile(accessToken);
 		System.out.println("personInfo.Id::"+person.getId());
 		WebResource getMyMemberConnectionsWebResource = client.resource("https://api.linkedin.com/v1/people/id="+person.getId()+"/connections?format=json&modified=new&oauth2_access_token=" + accessToken);
