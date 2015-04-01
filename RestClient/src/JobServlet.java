@@ -85,6 +85,31 @@ public class JobServlet  {
 		return output;
 	}	
 
+	
+	public Output GetMemberSuggestedJobs(String accessToken) {
+		System.out.println("MemberSuggestedJobs::");
+		Output output = new Output();
+		Client client = Client.create();
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/suggestions/job-suggestions:(jobs)?format=json&sort=R&oauth2_access_token=" + accessToken);
+		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
+		System.out.println("resp:::::" + resp);
+		if (resp.getStatus() == 200) {
+			String result = resp.getEntity(String.class);
+			System.out.println("result:::::::" + result);
+			try{
+				System.out.println("Inside try::");
+				output = new ObjectMapper().readValue(result, Output.class);
+				System.out.println("company::::::"+output);
+				return output;
+
+			}catch (Exception e) {
+				System.out.println("Exception" + e);
+				e.printStackTrace();
+			}
+		}
+		return output;
+	}	
+
 
 
 	public void addJobBookMark(String accessToken) { 
