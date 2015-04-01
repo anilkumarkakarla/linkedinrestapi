@@ -238,7 +238,7 @@ public class CompanyServlet {
 		System.out.println("result:::::::" + resp);
 	}
 
-	public void StopFollowingCompanies(String accessToken) throws Exception{ 
+	public void StopFollowingCompanies(String accessToken){ 
 		System.out.println("StopFollowingCompanies:::::::");
 		StringBuilder requestBody = new StringBuilder();
 		Client client = Client.create();
@@ -249,7 +249,7 @@ public class CompanyServlet {
 
 
 
-	public SuggestedCompanies getSuggestedCompanyToFollow(String accessToken) throws ServletException, IOException{
+	public SuggestedCompanies getSuggestedCompanyToFollow(String accessToken){
 		System.out.println("getSuggestedCompanyToFollow::");
 		SuggestedCompanies suggestedCompanies = new SuggestedCompanies();
 		Client client = Client.create();

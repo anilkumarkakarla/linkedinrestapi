@@ -13,7 +13,7 @@ public class GetPostComments {
 	@JsonProperty(value = "id")
 	private String id;
 
-	@JsonProperty(value = "id")
+	@JsonProperty(value = "relationToViewer")
 	private RelationToViewer relationToViewer;
 
 	@JsonProperty(value = "text")

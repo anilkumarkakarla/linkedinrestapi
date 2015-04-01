@@ -94,25 +94,12 @@ public class CompanyValues {
 	}
 
 
-	public boolean isNumLikes() {
-		return numLikes;
-	}
+	
 
 
-	public void setNumLikes(boolean numLikes) {
-		this.numLikes = numLikes;
-	}
+	
 
-
-	public long isTimestamp() {
-		return timestamp;
-	}
-
-
-	public void setTimestamp(long timestamp) {
-		this.timestamp = timestamp;
-	}
-
+	
 
 	public boolean isCommentable() {
 		return isCommentable;

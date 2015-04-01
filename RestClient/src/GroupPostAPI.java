@@ -48,30 +48,33 @@ public class GroupPostAPI {
 
 
 	public void followPost(String accessToken){
+		System.out.println("::::::followPost:::::::");
 		StringBuilder requestBody = new StringBuilder();
 		requestBody.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
 		requestBody.append("<is-following>true</is-following>");
 		Client client = Client.create();
-		WebResource webResource = client.resource("https://api.linkedin.com/v1/posts/g-6955413-S-5987218306111655939/relation-to-viewer/is-following?oauth2_access_token=" + accessToken);
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/posts/g-8281304-S-5988927470395494402/relation-to-viewer/is-following?oauth2_access_token=" + accessToken);
 		ClientResponse resp = webResource.type("application/xml").put(ClientResponse.class, requestBody.toString());
 		System.out.println("result:::::::" + resp);
 	}
 
 
 	public void unFollowPost(String accessToken){
+		System.out.println("unFollowPost:::::::");
 		StringBuilder requestBody = new StringBuilder();
 		requestBody.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
 		requestBody.append("<is-following>false</is-following>");
 		Client client = Client.create();
-		WebResource webResource = client.resource("https://api.linkedin.com/v1/posts/g-6955413-S-5987218306111655939/relation-to-viewer/is-following?oauth2_access_token=" + accessToken);
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/posts/g-8281304-S-5988927470395494402/relation-to-viewer/is-following?oauth2_access_token=" + accessToken);
 		ClientResponse resp = webResource.type("application/xml").put(ClientResponse.class, requestBody.toString());
 		System.out.println("result:::::::" + resp);
 	}
 
 	public void deleteComments(String accessToken){
+		System.out.println("deleteComments:::::::");
 		StringBuilder requestBody = new StringBuilder();
 		Client client = Client.create();
-		WebResource webResource = client.resource("https://api.linkedin.com/v1/comments/g-6954581-S-5988191447101235200-5988192616129245184?oauth2_access_token=" + accessToken);
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/comments/g-8281304-S-5988932174185795584-5988936139157827585?oauth2_access_token=" + accessToken);
 		ClientResponse resp = webResource.type("application/xml").delete(ClientResponse.class, requestBody.toString());
 		System.out.println("result:::::::" + resp);
 

@@ -182,7 +182,7 @@ public class GroupsClientAPI {
 		System.out.println("getPostComments::");
 		PostComments postComments = new PostComments();
 		Client client = Client.create();
-		WebResource webResource = client.resource("https://api.linkedin.com/v1/posts/g-4287325-S-5984894448432136194/comments?format=json&oauth2_access_token=" + accessToken);
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/posts/g-8281304-S-5988927470395494402/comments?format=json&oauth2_access_token=" + accessToken);
 		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + resp);
 		if (resp.getStatus() == 200) {
@@ -191,7 +191,7 @@ public class GroupsClientAPI {
 			try{
 				System.out.println("Inside try::");
 				postComments = new ObjectMapper().readValue(result, PostComments.class);
-				System.out.println("Groups::::::"+group);
+				System.out.println("postComments::::::"+postComments);
 				return postComments;
 
 			}catch (Exception e) {
@@ -228,10 +228,10 @@ public class GroupsClientAPI {
 	}
 
 	public DeleteUserSuggestedGroup  getDeletedUserSuggestedGroups(String accessToken){
-		System.out.println("getJob::");
+		System.out.println("getDeletedUserSuggestedGroups::");
 		DeleteUserSuggestedGroup deleteUserSuggestedGroup = new DeleteUserSuggestedGroup();
 		Client client = Client.create();
-		WebResource webResource = client.resource("https://api.linkedin.com/v1/jobs/1337?format=json&oauth2_access_token=" + accessToken);
+		WebResource webResource = client.resource("https://api.linkedin.com/v1/people/~/suggestions/groups/8277667?format=json&oauth2_access_token=" + accessToken);
 		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + resp);
 		if (resp.getStatus() == 200) {

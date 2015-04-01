@@ -43,7 +43,7 @@ public class NetworkUpdates {
 		System.out.println("accessToken:::"+accessToken);
 		CompaniesGroup companiesGroup = new CompaniesGroup();
 				Client client = Client.create();
-       WebResource webResource = client.resource("https://api.linkedin.com/v1/people/NcL1eZFWfO/network/updates?format=json&oauth2_access_token=" + accessToken);
+       WebResource webResource = client.resource("https://api.linkedin.com/v1/people/RVIgW9Qw89/network/updates?format=json&oauth2_access_token=" + accessToken);
 		ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
 		System.out.println("resp:::::" + resp);
 		if (resp.getStatus() == 200) {
