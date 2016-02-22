@@ -1,2 +1,2 @@
 # linkedinrestapi
-creating linkedin rest api.
+creating linkedin rest api
